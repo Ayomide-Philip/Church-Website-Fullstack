@@ -10,7 +10,7 @@ export async function signUp(req, res, next) {
   try {
     // get all the necessary information to sign up a new account
     let { fullName, email, password } = req.body;
-    // check if any part of it is not there, if its not there it should return an error
+    // check if any part of it is not there, if it's not there it should return an error
     if (!fullName || !email || !password) {
       return res
         .status(400)
@@ -18,7 +18,6 @@ export async function signUp(req, res, next) {
     }
     // check if the user exist already
     const existingUser = await Users.findOne({ email });
-    console.log(existingUser);
     if (existingUser) {
       return res
         .status(400)
@@ -34,7 +33,7 @@ export async function signUp(req, res, next) {
     const token = jwt.sign({ userId: newUser._id }, JSON_WEB_TOKEN_SECRET, {
       expiresIn: JSON_WEB_TOKEN_EXPIRES_IN,
     });
-    // send some info about the new user
+    // send some info about the new user and their token
     res.status(200).json({ success: true, data: { token, user: newUser } });
   } catch (err) {
     next(err);
