@@ -5,6 +5,7 @@ import {
   JSON_WEB_TOKEN_EXPIRES_IN,
   JSON_WEB_TOKEN_SECRET,
 } from "../config/env.config.js";
+import bcrypt from "bcryptjs";
 
 export async function signUp(req, res, next) {
   try {
@@ -42,7 +43,38 @@ export async function signUp(req, res, next) {
 
 export async function login(req, res, next) {
   try {
-    console.log(req.body);
+    //destructure the req.body
+    const { email, password } = req.body;
+    //checking if the parameters required are passed
+    if (email == undefined || password == undefined) {
+      return res
+        .status(400)
+        .json({ success: false, error: "Inputs is required" });
+    }
+    // check if the user exists
+    const userExist = await Users.findOne({ email });
+
+    // if user doesn't exist tell them it doesn't
+    if (!userExist) {
+      return res
+        .status(400)
+        .json({ success: false, error: "User does not exist" });
+    }
+    // check if the password are the same
+    const isPasswordValid = await bcrypt.compare(password, userExist.password);
+    // if the password is not valid
+    if (!isPasswordValid) {
+      return res
+        .status(400)
+        .json({ success: false, error: "Password does not match each other" });
+    }
+    // if password is valid generate token
+    const token = jwt.sign({ userId: userExist._id }, JSON_WEB_TOKEN_SECRET, {
+      expiresIn: JSON_WEB_TOKEN_EXPIRES_IN,
+    });
+
+    // return the user details and token if the password and emails are valid
+    res.status(200).json({ success: true, data: { token, users: userExist } });
   } catch (err) {
     next(err);
   }
