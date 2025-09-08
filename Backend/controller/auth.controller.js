@@ -1,5 +1,10 @@
 import { Users } from "../models/user.models.js";
 import hashPlainPassword from "../utility/hashpassword.utility.js";
+import jwt from "jsonwebtoken";
+import {
+  JSON_WEB_TOKEN_EXPIRES_IN,
+  JSON_WEB_TOKEN_SECRET,
+} from "../config/env.config.js";
 
 export async function signUp(req, res, next) {
   try {
@@ -12,7 +17,8 @@ export async function signUp(req, res, next) {
         .json({ success: false, error: "Inputs is required" });
     }
     // check if the user exist already
-    const existingUser = await Users.find({ email });
+    const existingUser = await Users.findOne({ email });
+    console.log(existingUser);
     if (existingUser) {
       return res
         .status(400)
@@ -25,9 +31,11 @@ export async function signUp(req, res, next) {
       password: await hashPlainPassword(password),
     });
     // generate a token for the user
-
+    const token = jwt.sign({ userId: newUser._id }, JSON_WEB_TOKEN_SECRET, {
+      expiresIn: JSON_WEB_TOKEN_EXPIRES_IN,
+    });
     // send some info about the new user
-    res.json(newUser);
+    res.status(200).json({ success: true, data: { token, user: newUser } });
   } catch (err) {
     next(err);
   }
