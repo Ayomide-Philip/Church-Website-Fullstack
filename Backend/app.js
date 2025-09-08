@@ -1,7 +1,11 @@
 import express from "express";
-import {PORT} from "./config/env.config.js";
-const app = express();
+import { PORT } from "./config/env.config.js";
+import connectToDatabase from "./database/mongo.database.js";
 
+const app = express();
+connectToDatabase();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
