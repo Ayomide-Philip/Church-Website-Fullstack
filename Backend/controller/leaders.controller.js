@@ -2,7 +2,6 @@ import { Leaders } from "../models/leaders.models.js";
 
 export async function createLeader(req, res, next) {
   try {
-    //
     const { id } = req.user;
     // destructuring the request body
     const { name, role, description, imageUrl } = req.body;
@@ -24,4 +23,13 @@ export async function createLeader(req, res, next) {
   } catch (err) {
     next(err);
   }
+}
+
+export async function getAllLeaders(req, res, next){
+    try {
+        const allUsers = await Leaders.find();
+        return res.status(200).json({success: true, data: {leaders: allUsers }});
+    }catch(err){
+        next(err);
+    }
 }
