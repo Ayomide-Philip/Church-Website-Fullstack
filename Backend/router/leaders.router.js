@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createLeader } from "../controller/leaders.controllers.js";
+import { createLeader } from "../controller/leaders.controller.js";
 
 const leaderRouter = new Router();
 
