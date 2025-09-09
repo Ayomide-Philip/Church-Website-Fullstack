@@ -73,3 +73,198 @@ export const  faq = [
       "We believe in the mandate given by Jesus Christ to make disciples of all nations, proclaiming the gospel and demonstrating God’s love through acts of compassion and justice.Jesus commissioned His followers to spread the gospel, making disciples of all nations by proclaiming His message of salvation and demonstrating His love through compassionate service and advocacy for justice.",
   },
 ];
+
+export const leader = [
+  {
+    name: "Rev. Dr. Adedeji Emmanuel Ade",
+    role: "UI Developer",
+    description:
+      " DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+    imageLocation: "guidingLight",
+    imageName: "seniorRved",
+  },
+  {
+    name: "Rev. Dr. Wuyi Oke",
+    role: "Designer",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+    imageLocation: "guidingLight",
+    imageName: "assistantSeniorRved",
+  },
+  {
+    name: "Rev. Dr. Damola Adeyefa",
+    role: "Designer",
+    imageName: "englishRved",
+    imageLocation: "guidingLight",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "Rev. Miss Florence  Adedeji",
+    role: "UI Developer",
+    imageName: "rvedMiss",
+    imageLocation: "guidingLight",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "teenager-pastor",
+    imageLocation: "guidingLight",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "teen-pastor",
+    imageLocation: "guidingLight",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "children",
+    imageLocation: "guidingLight",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "ogo-oluwa",
+    imageLocation: "guidingLight",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "evangelism",
+    imageLocation: "guidingLight",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "old-age-affairs",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "teen-cord",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "deaconate-chairperson",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "deacon-youth",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "deaconation",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "social-maintance",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "widows-affairs",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "ogyiigunPrecher",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "deacon-evanglism",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "evan-2",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "pastorium-welfare",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "resolutionCommittee",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "church-development",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "deacon-fellowship",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+  {
+    name: "lorem ipesum",
+    role: "UI Developer",
+    imageName: "deacon-weeding",
+    imageLocation: "supportingMinistry",
+    description:
+      "DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.",
+  },
+];
