@@ -8,7 +8,7 @@ const app = express();
 connectToDatabase();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/auth", authRouter);
+app.use("/admin/auth", authRouter);
 app.use(errorHandler);
 
 app.get("/", (req, res) => {
