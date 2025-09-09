@@ -9,7 +9,7 @@ import Contact from "../componets/home/contact";
 import Footer from "../componets/footer";
 export default function Home() {
   return (
-    <>
+    <div>
       <Header />
       <VideoBanner
         title="Welcome To Gateway Baptist Church."
@@ -22,7 +22,7 @@ export default function Home() {
       <Step />
       <Faq />
       <Contact />
-      <Footer/>
-    </>
+      <Footer />
+    </div>
   );
 }
