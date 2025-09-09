@@ -1,25 +1,5 @@
-const step = [
-  {
-    title: "Acknowledge Your Need for Christ",
-    description:
-      "Acknowledge that you are a sinner and need Jesus for forgiveness and salvation.",
-  },
-  {
-    title: "Repent from Sin",
-    description:
-      "Repent by turning away from sin and seeking God's mercy with a sincere heart.",
-  },
-  {
-    title: "Believe in Jesus Christ",
-    description:
-      "Believe that Jesus died for your sins and rose again to give you life.",
-  },
-  {
-    title: "Confess and Accept Jesus as Lord",
-    description:
-      "Confess Jesus as your Lord and surrender your life completely to His guidance.",
-  },
-];
+import { step } from "./home";
+
 export default function Step() {
   return (
     <section className="text-gray-400 bg-gray-900 body-font">

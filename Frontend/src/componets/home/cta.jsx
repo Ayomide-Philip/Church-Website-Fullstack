@@ -1,3 +1,4 @@
+import { cta } from "./home";
 export default function Cta() {
   return (
     <div className="overflow-hidden bg-white py-12 sm:py-16">
@@ -10,26 +11,15 @@ export default function Cta() {
               </h2>
 
               <p className="mt-2 text-2xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
-                Gateway Baptist Church: Where Faith Meets Community
+                {cta.heading}
               </p>
-
-              <p className="mt-6 text-lg/8 text-gray-600">
-                At Gateway Baptist Church, we extend a heartfelt welcome to you.
-                Our church is a place where faith and community converge,
-                forming the cornerstone of our identity.
-              </p>
-
-              <p className="mt-6 text-lg/8 text-gray-600">
-                Join us as we worship together, study the Word, and engage in
-                meaningful fellowship. Experience the warmth of our community
-                and discover how faith can enrich your life. At Gateway Baptist
-                Church, you'll find not just a place of worship, but a family
-                ready to welcome you with open arms.
-              </p>
+              {cta.paragraph.map((p) => {
+                return <p className="mt-6 text-lg/8 text-gray-600">{p}</p>;
+              })}
             </div>
           </div>
           <img
-            alt="Product screenshot"
+            alt="Church"
             src="/images/cta-image.jpg"
             width={2432}
             height={1442}
