@@ -2,8 +2,10 @@ import { Leaders } from "../models/leaders.models.js";
 
 export async function createLeader(req, res, next) {
   try {
+    //
+    const { id } = req.user;
     // destructuring the request body
-    const { name, role, description, imageUrl, creatorId } = req.body;
+    const { name, role, description, imageUrl } = req.body;
     // check if the required thing needed are passed
     if (name === undefined || role === undefined || description === undefined) {
       return res
@@ -16,7 +18,7 @@ export async function createLeader(req, res, next) {
       role,
       description,
       imageUrl,
-      creatorId,
+      creatorId: id,
     });
     return res.status(201).send({ success: true, data: { leader: newLeader } });
   } catch (err) {

@@ -28,11 +28,14 @@ export default async function protect(req, res, next) {
     }
     //check if the user exists in the database
     const verifyUser = await Users.findById(verifyToken.userId);
-    
+
     // check if no user was returned
-      if (!verifyUser) {
-          return res.status(401).send({ success: false, error: "User not found" });
-      }
+    if (!verifyUser) {
+      return res.status(401).send({ success: false, error: "User not found" });
+    }
+
+    req.user = { id: verifyToken.userId };
+    next();
   } catch (err) {
     console.log(err);
     return res.status(401).send({ success: false, error: "Unauthorized" });
