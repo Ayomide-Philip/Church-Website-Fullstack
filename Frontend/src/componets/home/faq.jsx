@@ -46,20 +46,21 @@ const faq = [
 export default function Faq() {
   return (
     <div className="space-y-4 pl-10 pr-10 pt-10 pb-10">
-      <div class="flex flex-col text-center w-full mb-5">
-        <h1 class="text-3xl font-medium title-font mb-4 text-black tracking-widest">
+      <div className="flex flex-col text-center w-full mb-5">
+        <h1 className="text-3xl font-medium title-font mb-4 text-black tracking-widest">
           Statement Of Faith
         </h1>
       </div>
-      {faq.map((faq) => {
+      {faq.map(({ index, heading, content }, idx) => {
         return (
           <details
             className="group border-s-4 border-blue-500 bg-gray-50 p-6 [&_summary::-webkit-details-marker]:hidden"
-            open={faq.index === 0 ? true : false}
+            open={index === 0 ? true : false}
+            key={idx}
           >
             <summary className="flex cursor-pointer items-center justify-between gap-1.5">
               <h2 className="text-lg font-medium text-gray-900">
-                {faq.heading}
+                {heading}
               </h2>
 
               <span className="shrink-0 rounded-full bg-white p-1.5 text-gray-900 sm:p-3">
@@ -78,7 +79,7 @@ export default function Faq() {
               </span>
             </summary>
 
-            <p className="mt-4 leading-relaxed text-gray-700">{faq.content}</p>
+            <p className="mt-4 leading-relaxed text-gray-700">{content}</p>
           </details>
         );
       })}

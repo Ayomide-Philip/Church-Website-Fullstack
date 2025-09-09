@@ -45,9 +45,9 @@ export default function Team() {
           </p>
         </div>
         <div className="flex flex-wrap -m-4">
-          {team.map((members) => {
+          {team.map((members, idx) => {
             return (
-              <div className="p-4 lg:w-1/2">
+              <div className="p-4 lg:w-1/2" key={idx}>
                 <div className="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
                   <img
                     alt="team"
