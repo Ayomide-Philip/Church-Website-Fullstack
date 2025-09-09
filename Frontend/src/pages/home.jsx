@@ -10,7 +10,6 @@ import Footer from "../componets/footer";
 export default function Home() {
   return (
     <div>
-      <Header />
       <VideoBanner
         title="Welcome To Gateway Baptist Church."
         subtitle="... Community of Grace."
@@ -22,7 +21,6 @@ export default function Home() {
       <Step />
       <Faq />
       <Contact />
-      <Footer />
     </div>
   );
 }
