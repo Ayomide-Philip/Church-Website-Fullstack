@@ -3,7 +3,9 @@ export default function SideBar() {
     <div className="hidden md:flex md:flex-shrink-0">
       <div className="flex flex-col w-64 bg-blue-800 text-white">
         <div className="flex items-center justify-center h-16 px-4 bg-blue-900">
-          <span className="text-xl font-semibold">Gateway</span>
+          <span className="text-xl font-semibold">
+            <img src="/logo.png" alt="Logo" className="h-15" />
+          </span>
         </div>
         <div className="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
           <nav className="flex-1 space-y-2">
