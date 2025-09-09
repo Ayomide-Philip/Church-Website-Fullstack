@@ -5,10 +5,7 @@ import { Users } from "../models/user.models.js";
 export default async function protect(req, res, next) {
   try {
     let token;
-    if (
-      req.headers.authorization &&
-      req.headers.authorization.startsWith("Bearer")
-    ) {
+    if (req.headers.authorization &&req.headers.authorization.startsWith("Bearer")) {
       token = req.headers.authorization.split(" ")[1];
     }
     //check if a token exist
@@ -19,7 +16,7 @@ export default async function protect(req, res, next) {
     }
     // verify the token
     const verifyToken = jwt.verify(token, JSON_WEB_TOKEN_SECRET);
-    console.log(verifyToken);
+    
     // if no token is provided
     if (!verifyToken) {
       return res
