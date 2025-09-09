@@ -72,7 +72,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white">
+    <header className="bg-white overflow-hidden w-full shadow-sm">
       <nav
         aria-label="Global"
         className="mx-auto flex max-w-7xl items-center justify-between p-1 lg:px-8"
@@ -82,7 +82,7 @@ export default function Header() {
             <span className="sr-only">Your Company</span>
             <img
               alt="Church Logo"
-              src="/images/images.png"
+              src="/logo.png"
               className="h-20 w-auto"
             />
           </a>
