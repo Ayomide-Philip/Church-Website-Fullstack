@@ -1,7 +1,25 @@
+import { Leaders } from "../models/leaders.models.js";
+
 export async function createLeader(req, res, next) {
-    try {
-        res.json({message: "Create Leader"});
-    }catch(err){
-        next(err);
+  try {
+    // destructuring the request body
+    const { name, role, description, imageUrl, creatorId } = req.body;
+    // check if the required thing needed are passed
+    if (name === undefined || role === undefined || description === undefined) {
+      return res
+        .status(400)
+        .send({ success: false, message: "Inputs required" });
     }
+    // if required fields are passed add them to the db
+    const newLeader = await Leaders.create({
+      name,
+      role,
+      description,
+      imageUrl,
+      creatorId,
+    });
+    return res.status(201).send({ success: true, data: { leader: newLeader } });
+  } catch (err) {
+    next(err);
+  }
 }

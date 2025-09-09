@@ -28,8 +28,15 @@ const leadersModels = new mongoose.Schema(
       minLength: 5,
       maxLength: 2000,
     },
+    creatorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Users",
+    },
   },
   { timestamps: true }
 );
+
+leadersModels.index({ name: 1, role: 1 }, { unique: true });
 
 export const Leaders = mongoose.model("Leaders", leadersModels);
