@@ -6,6 +6,6 @@ const leaderRouter = new Router();
 
 leaderRouter.get("/", getAllLeaders);
 leaderRouter.post("/",protect, createLeader);
-leaderRouter.get("/:leaderId", getParticularLeader);
+leaderRouter.get("/:leaderId",protect, getParticularLeader);
 
 export default leaderRouter;
