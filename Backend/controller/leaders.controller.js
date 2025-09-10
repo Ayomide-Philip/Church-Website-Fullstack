@@ -38,13 +38,17 @@ export async function getParticularLeader(req, res, next) {
   try {
     const { leaderId } = req.params;
     // check i the user exist
-      const checkLeader = await Leaders.findById(leaderId);
-      // return an error if no user is found
-      if (!checkLeader) {
-          return res.status(404).send({success: false, message: "No leader found with that Id" });
-      }
-      // return the leader if it exists
-      return res.status(200).send({ success: true, data: { leader: checkLeader } });
+    const checkLeader = await Leaders.findById(leaderId);
+    // return an error if no user is found
+    if (!checkLeader) {
+      return res
+        .status(404)
+        .send({ success: false, message: "No leader found with that Id" });
+    }
+    // return the leader if it exists
+    return res
+      .status(200)
+      .send({ success: true, data: { leader: checkLeader } });
   } catch (err) {
     next(err);
   }
