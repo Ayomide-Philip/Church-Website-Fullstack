@@ -53,3 +53,45 @@ export async function getParticularLeader(req, res, next) {
     next(err);
   }
 }
+
+export async function editParticularUser(req, res, next) {
+  try {
+    const { leaderId } = req.params;
+    // destructure  the req.body
+    const { name, role, description, imageUrl } = req.body;
+    // find the leader with this unique id
+    const editedLeader = await Leaders.findById(leaderId);
+    // check if any of this input changed
+    if (!editedLeader) {
+      return res
+        .status(404)
+        .send({ success: false, message: "No leader found with that Id" });
+    }
+    // change the detail about the leader that changed
+      let edited = false;
+      if (name !== undefined && name !== editedLeader.name) {
+      editedLeader.name = name;
+      edited = true;
+    }
+    if (role !== undefined && role !== editedLeader.role) {
+      editedLeader.role = role;
+      edited = true;
+    }
+    if (description !== undefined && description !== editedLeader.description) {
+      editedLeader.description = description;
+      edited = true;
+    }
+    if (imageUrl !== undefined && imageUrl !== editedLeader.imageUrl) {
+      editedLeader.imageUrl = imageUrl;
+      edited = true;
+    }
+
+    if (!edited) {
+        return res.status(404).send({ success: false, message: "No field was edited" });
+    }
+    await editedLeader.save();
+    res.status(200).send({ success: true, data: { leader: editedLeader } });
+  } catch (err) {
+    next(err);
+  }
+}
