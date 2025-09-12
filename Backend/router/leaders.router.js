@@ -12,6 +12,6 @@ const leaderRouter = new Router();
 leaderRouter.get("/", getAllLeaders);
 leaderRouter.post("/",protect, createLeader);
 leaderRouter.get("/:leaderId",protect, getParticularLeader);
-leaderRouter.patch("/:leaderId",editParticularUser)
+leaderRouter.patch("/:leaderId", protect, editParticularUser);
 
 export default leaderRouter;
