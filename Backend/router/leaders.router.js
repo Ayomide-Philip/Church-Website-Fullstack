@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {
-    createLeader,
+    createLeader, deleteParticularLeader,
     editParticularUser,
     getAllLeaders,
     getParticularLeader
@@ -13,5 +13,6 @@ leaderRouter.get("/", getAllLeaders);
 leaderRouter.post("/",protect, createLeader);
 leaderRouter.get("/:leaderId",protect, getParticularLeader);
 leaderRouter.patch("/:leaderId", protect, editParticularUser);
+leaderRouter.delete("/:leaderId", protect, deleteParticularLeader)
 
 export default leaderRouter;

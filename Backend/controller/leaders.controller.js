@@ -95,3 +95,25 @@ export async function editParticularUser(req, res, next) {
     next(err);
   }
 }
+
+export async function deleteParticularLeader(req, res , next){
+    try {
+        const {leaderId} = req.params;
+        // find the leader with the particular id
+        const leader = await Leaders.findById(leaderId)
+        //if no leader is found it should return an error
+        if (!leader){
+            return res.status(404).send({ success: false, error: "No leader found with that Id" });
+        }
+
+        const deletingLeader = await Leaders.deleteOne({_id : leaderId})
+        console.log(deletingLeader);
+
+        if (deletingLeader.acknowledged === false) {
+            return res.status(400).json({success: false, error:"Unable to delete user"});
+        }
+        res.status(200).send({ success: true, message:"Delete user successful" });
+    }catch(err){
+        next(err)
+    }
+}
