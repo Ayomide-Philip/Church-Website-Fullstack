@@ -4,6 +4,7 @@ import connectToDatabase from "./database/mongo.database.js";
 import authRouter from "./router/auth.router.js";
 import { errorHandler } from "./middleware/error.middleware.js";
 import leaderRouter from "./router/leaders.router.js";
+import feedbackRouter from "./router/feedback.router.js";
 
 const app = express();
 connectToDatabase();
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/admin/auth", authRouter);
 app.use("/leaders", leaderRouter);
+app.use("/feedback", feedbackRouter);
 app.use(errorHandler);
 
 app.get("/", (req, res) => {

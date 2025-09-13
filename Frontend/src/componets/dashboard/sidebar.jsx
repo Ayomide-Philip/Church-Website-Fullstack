@@ -5,8 +5,9 @@ import {
   ListVideoIcon,
   MessageCircle,
   Settings2,
-  User,
+  Users,
   User2,
+  MessageCircleCode,
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
@@ -21,12 +22,12 @@ export default function SideBar() {
     {
       href: "/dashboard/members",
       title: "Members",
-      icon: User,
+      icon: User2,
     },
     {
       href: "/dashboard/leaders",
       title: "Leaders",
-      icon: User2,
+      icon: Users,
     },
     {
       href: "/dashboard/live",
@@ -37,6 +38,11 @@ export default function SideBar() {
       href: "/dashboard/message",
       title: "Message",
       icon: MessageCircle,
+    },
+    {
+      href: "/dashboard/feedback",
+      title: "Feedback",
+      icon: MessageCircleCode,
     },
 
     {
