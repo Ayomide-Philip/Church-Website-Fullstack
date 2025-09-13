@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+    deleteFeedbackById,
     getAllFeedbacks, getFeedbackById,
     postNewFeedback,
 } from "../controller/feedback.controller.js";
@@ -9,6 +10,7 @@ const feedbackRouter = Router();
 
 feedbackRouter.get("/", protect, getAllFeedbacks);
 feedbackRouter.post("/", postNewFeedback);
-feedbackRouter.get("/:feedbackId",getFeedbackById )
+feedbackRouter.get("/:feedbackId",protect,getFeedbackById);
+feedbackRouter.delete("/:feedbackId", deleteFeedbackById);
 
 export default feedbackRouter;
