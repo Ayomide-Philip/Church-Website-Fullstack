@@ -71,8 +71,8 @@ export default function SideBar() {
           <div className="flex items-center">
             <img
               className="w-10 h-10 rounded-full"
-              src="https://randomuser.me/api/portraits/women/11.jpg"
-              alt="User"
+              src="/blank-profile-picture-973460_960_720.webp"
+              alt="Admin"
             />
             <div className="ml-3">
               <p className="text-sm font-medium">Sarah Johnson</p>

@@ -19,7 +19,7 @@ export default function DashboardHeader() {
           <button className="flex items-center focus:outline-none">
             <img
               className="w-8 h-8 rounded-full"
-              src="https://randomuser.me/api/portraits/women/11.jpg"
+              src="/blank-profile-picture-973460_960_720.webp"
               alt="User"
             />
           </button>
