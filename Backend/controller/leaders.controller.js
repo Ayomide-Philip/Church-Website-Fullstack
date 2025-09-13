@@ -21,6 +21,11 @@ export async function createLeader(req, res, next) {
     });
     return res.status(201).send({ success: true, data: { leader: newLeader } });
   } catch (err) {
+       if (err.code && err.code === 11000) {
+      return res
+        .status(400)
+        .send({ success: false, message: "Role is the same as previous" });
+    }
     next(err);
   }
 }

@@ -15,7 +15,7 @@ export default async function protect(req, res, next) {
     if (!token) {
       return res
         .status(401)
-        .send({ success: false, error: "No token provided" });
+        .send({ success: false, error: "User Session Unauthorized" });
     }
     // verify the token
     const verifyToken = jwt.verify(token, JSON_WEB_TOKEN_SECRET);
@@ -35,7 +35,7 @@ export default async function protect(req, res, next) {
     }
 
     req.user = { id: verifyToken.userId };
-    req.role ={role : verifyToken.role}
+    req.role = { role: verifyToken.role };
     next();
   } catch (err) {
     console.log(err.message);

@@ -35,6 +35,11 @@ export async function postNewFeedback(req, res, next) {
     // return the new feedback back
     return res.status(200).send({ success: true, data: { feedback } });
   } catch (err) {
+    if (err.code && err.code === 11000) {
+      return res
+        .status(400)
+        .send({ success: false, message: "Message is the same as previous" });
+    }
     next(err);
   }
 }
