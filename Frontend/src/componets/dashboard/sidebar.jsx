@@ -1,4 +1,56 @@
+/* eslint-disable no-unused-vars */
+import {
+  Calendar,
+  ChartBar,
+  ListVideoIcon,
+  MessageCircle,
+  Settings2,
+  User,
+  User2,
+} from "lucide-react";
+import { useLocation } from "react-router-dom";
+
 export default function SideBar() {
+  const location = useLocation();
+  const Links = [
+    {
+      href: "/dashboard",
+      title: "Dashboard",
+      icon: ChartBar,
+    },
+    {
+      href: "/dashboard/members",
+      title: "Members",
+      icon: User,
+    },
+    {
+      href: "/dashboard/leaders",
+      title: "Leaders",
+      icon: User2,
+    },
+    {
+      href: "/dashboard/live",
+      title: "Live",
+      icon: ListVideoIcon,
+    },
+    {
+      href: "/dashboard/message",
+      title: "Message",
+      icon: MessageCircle,
+    },
+
+    {
+      href: "/dashboard/blog",
+      title: "Blog",
+      icon: Calendar,
+    },
+    {
+      href: "/dashboard/settings",
+      title: "Settings",
+      icon: Settings2,
+    },
+  ];
+
   return (
     <div className="hidden md:flex md:flex-shrink-0">
       <div className="flex flex-col w-64 bg-blue-800 text-white">
@@ -9,62 +61,22 @@ export default function SideBar() {
         </div>
         <div className="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
           <nav className="flex-1 space-y-2">
-            <a
-              href="/dashboard"
-              className="flex items-center px-4 py-2 text-sm font-medium rounded-md bg-blue-700 text-white"
-            >
-              <i className="fas fa-tachometer-alt mr-3"></i>
-              Dashboard
-            </a>
-            <a
-              href="#"
-              className="flex items-center px-4 py-2 text-sm font-medium rounded-md hover:bg-blue-700 text-white"
-            >
-              <i className="fas fa-calendar-check mr-3"></i>
-              Members
-            </a>
-            <a
-              href="#"
-              className="flex items-center px-4 py-2 text-sm font-medium rounded-md hover:bg-blue-700 text-white"
-            >
-              <i className="fas fa-bed mr-3"></i>
-              Leaders
-            </a>
-            <a
-              href="#"
-              className="flex items-center px-4 py-2 text-sm font-medium rounded-md hover:bg-blue-700 text-white"
-            >
-              <i className="fas fa-concierge-bell mr-3"></i>
-              Services
-            </a>
-            <a
-              href="#"
-              className="flex items-center px-4 py-2 text-sm font-medium rounded-md hover:bg-blue-700 text-white"
-            >
-              <i className="fas fa-chart-bar mr-3"></i>
-              Live
-            </a>
-            <a
-              href="#"
-              className="flex items-center px-4 py-2 text-sm font-medium rounded-md hover:bg-blue-700 text-white"
-            >
-              <i className="fas fa-chart-bar mr-3"></i>
-              Message
-            </a>
-            <a
-              href="#"
-              className="flex items-center px-4 py-2 text-sm font-medium rounded-md hover:bg-blue-700 text-white"
-            >
-              <i className="fas fa-chart-bar mr-3"></i>
-              Blog
-            </a>
-            <a
-              href="#"
-              className="flex items-center px-4 py-2 text-sm font-medium rounded-md hover:bg-blue-700 text-white"
-            >
-              <i className="fas fa-cog mr-3"></i>
-              Settings
-            </a>
+            {Links.map(({ href, title, icon: Icon }, idx) => {
+              return (
+                <a
+                  href={href}
+                  key={idx}
+                  className={`flex items-center px-4 py-2 text-sm font-medium rounded-md ${
+                    location.pathname === href
+                      ? "bg-blue-700"
+                      : "hover:bg-blue-700"
+                  } text-white`}
+                >
+                  <Icon className="mr-4" />
+                  {title}
+                </a>
+              );
+            })}
           </nav>
         </div>
         <div className="p-4 border-t border-blue-700">

@@ -9,15 +9,15 @@ const overview = [
 export default function DashboardOverview() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-      {overview.map(({ title, number, logo: Logo }, idx) => {
+      {overview.map(({ title, number, logo: Icon }, idx) => {
         return (
           <div className="bg-white rounded-lg shadow p-6" key={idx}>
             <div className="flex items-center">
               <div className="p-3 rounded-full bg-blue-100 text-blue-600">
-                <Logo className="h-5 w-5" />
+                <Icon className="h-5 w-5" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">{title}</p>
+                <p className="text-sm font-medium text-black">{title}</p>
                 <p className="text-2xl font-semibold text-gray-800">{number}</p>
               </div>
             </div>
