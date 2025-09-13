@@ -35,6 +35,7 @@ export default async function protect(req, res, next) {
     }
 
     req.user = { id: verifyToken.userId };
+    req.role ={role : verifyToken.role}
     next();
   } catch (err) {
     console.log(err.message);

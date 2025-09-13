@@ -10,7 +10,7 @@ import bcrypt from "bcryptjs";
 export async function signUp(req, res, next) {
   try {
     // get all the necessary information to sign up a new account
-    let { fullName, email, password, role } = req.body;
+    let { fullName, email, password } = req.body;
     // check if any part of it is not there, if it's not there it should return an error
     if (!fullName || !email || !password) {
       return res
@@ -29,7 +29,6 @@ export async function signUp(req, res, next) {
       fullName,
       email,
       password: await hashPlainPassword(password),
-        role: role === "administrator" ? "user" : "user",
     });
     // generate a token for the user
     const token = jwt.sign({ userId: newUser._id }, JSON_WEB_TOKEN_SECRET, {

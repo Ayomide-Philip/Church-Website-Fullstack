@@ -1,6 +1,6 @@
-
 import SideBar from "../../componets/dashboard/sidebar";
 import DashboardHeader from "../../componets/dashboard/header";
+import { Calendar, MessageCircle, User2, Users } from "lucide-react";
 export default function DashboardHome() {
   return (
     <div className="flex h-screen overflow-hidden">
@@ -13,12 +13,10 @@ export default function DashboardHome() {
             <div className="bg-white rounded-lg shadow p-6">
               <div className="flex items-center">
                 <div className="p-3 rounded-full bg-blue-100 text-blue-600">
-                  <i className="fas fa-bed text-xl"></i>
+                  <Users className="h-5 w-5" />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-500">
-                    Total Rooms
-                  </p>
+                  <p className="text-sm font-medium text-gray-500">Leaders</p>
                   <p className="text-2xl font-semibold text-gray-800">120</p>
                 </div>
               </div>
@@ -26,10 +24,10 @@ export default function DashboardHome() {
             <div className="bg-white rounded-lg shadow p-6">
               <div className="flex items-center">
                 <div className="p-3 rounded-full bg-green-100 text-green-600">
-                  <i className="fas fa-calendar-check text-xl"></i>
+                  <User2 className="w-5 h-5" />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-500">Occupied</p>
+                  <p className="text-sm font-medium text-gray-500">Members</p>
                   <p className="text-2xl font-semibold text-gray-800">84</p>
                 </div>
               </div>
@@ -37,12 +35,10 @@ export default function DashboardHome() {
             <div className="bg-white rounded-lg shadow p-6">
               <div className="flex items-center">
                 <div className="p-3 rounded-full bg-yellow-100 text-yellow-600">
-                  <i className="fas fa-calendar-day text-xl"></i>
+                  <Calendar className="w-5 h-5" />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-500">
-                    Check-ins Today
-                  </p>
+                  <p className="text-sm font-medium text-gray-500">Blog</p>
                   <p className="text-2xl font-semibold text-gray-800">12</p>
                 </div>
               </div>
@@ -50,12 +46,10 @@ export default function DashboardHome() {
             <div className="bg-white rounded-lg shadow p-6">
               <div className="flex items-center">
                 <div className="p-3 rounded-full bg-red-100 text-red-600">
-                  <i className="fas fa-calendar-times text-xl"></i>
+                  <MessageCircle className="h-5 w-5" />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-500">
-                    Check-outs Today
-                  </p>
+                  <p className="text-sm font-medium text-gray-500">Message</p>
                   <p className="text-2xl font-semibold text-gray-800">8</p>
                 </div>
               </div>
