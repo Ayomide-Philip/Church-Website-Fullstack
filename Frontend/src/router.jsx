@@ -3,6 +3,7 @@ import Home from "./pages/home";
 import DashboardHome from "./pages/dashboard";
 import OurLeader from "./pages/home/leaders";
 import HomeLayout from "./componets/homeLayout";
+import DashboardLayout from "./componets/dashboard/dashboardLayout";
 export default function PageRouter() {
   return (
     <RouterProvider
@@ -15,7 +16,11 @@ export default function PageRouter() {
             { path: "/leaders", element: <OurLeader /> },
           ],
         },
-        { path: "/dashboard", element: <DashboardHome /> },
+        {
+          path: "/dashboard",
+          element: <DashboardLayout />,
+          children: [{ element: <DashboardHome />, index: true }],
+        },
       ])}
     />
   );
