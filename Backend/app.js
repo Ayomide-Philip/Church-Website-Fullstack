@@ -1,13 +1,19 @@
 import express from "express";
-import { PORT } from "./config/env.config.js";
+import { FRONTEND_URL, PORT } from "./config/env.config.js";
 import connectToDatabase from "./database/mongo.database.js";
 import authRouter from "./router/auth.router.js";
 import { errorHandler } from "./middleware/error.middleware.js";
 import leaderRouter from "./router/leaders.router.js";
 import feedbackRouter from "./router/feedback.router.js";
-
+import cors from "cors";
 const app = express();
 connectToDatabase();
+const corsOptions = {
+  origin: FRONTEND_URL, // Change this to your frontend's URL
+  methods: "GET,POST,PUT,DELETE", // Specify allowed methods
+  allowedHeaders: "Content-Type, Authorization", // Allow these headers
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/admin/auth", authRouter);
