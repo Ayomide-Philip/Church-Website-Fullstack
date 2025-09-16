@@ -4,8 +4,8 @@ import protect from "../middleware/protect.middleware.js";
 
 const userRouter = new Router();
 
-userRouter.get("/", getAllUsers);
+userRouter.get("/",protect, getAllUsers);
 userRouter.get("/me",protect, getRequestUser);
-userRouter.get("/:id", getUserById);
+userRouter.get("/:id", protect,getUserById);
 
 export default userRouter;
