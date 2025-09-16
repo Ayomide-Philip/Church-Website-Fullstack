@@ -5,7 +5,9 @@ import DashboardHome, {
 } from "./pages/dashboard";
 import OurLeader from "./pages/home/leaders";
 import HomeLayout from "./componets/homeLayout";
-import DashboardLayout from "./componets/dashboard/dashboardLayout";
+import DashboardLayout, {
+  Loader as DashboardLayoutLoader,
+} from "./componets/dashboard/dashboardLayout";
 import Login, { Action as FormAction } from "./pages/login";
 export default function PageRouter() {
   return (
@@ -21,8 +23,10 @@ export default function PageRouter() {
           ],
         },
         {
+          id: "dashboard",
           path: "/dashboard",
           element: <DashboardLayout />,
+          loader: DashboardLayoutLoader,
           children: [
             {
               element: <DashboardHome />,

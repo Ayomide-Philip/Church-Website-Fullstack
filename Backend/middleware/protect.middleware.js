@@ -19,7 +19,6 @@ export default async function protect(req, res, next) {
     }
     // verify the token
     const verifyToken = jwt.verify(token, JSON_WEB_TOKEN_SECRET);
-
     // if no token is provided
     if (!verifyToken) {
       return res

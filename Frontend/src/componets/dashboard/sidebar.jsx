@@ -9,9 +9,13 @@ import {
   User2,
   MessageCircleCode,
 } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
 
 export default function SideBar() {
+  const {
+    user: { fullName, role },
+  } = useLoaderData();
+
   const location = useLocation();
   const Links = [
     {
@@ -93,8 +97,8 @@ export default function SideBar() {
               alt="Admin"
             />
             <div className="ml-3">
-              <p className="text-sm font-medium">Sarah Johnson</p>
-              <p className="text-xs text-blue-200">Admin</p>
+              <p className="text-sm font-medium">{fullName}</p>
+              <p className="text-xs text-blue-200">{role}</p>
             </div>
           </div>
         </div>

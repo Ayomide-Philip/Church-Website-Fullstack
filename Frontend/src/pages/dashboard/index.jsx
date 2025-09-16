@@ -39,7 +39,7 @@ export default function DashboardHome() {
                       <div className="flex-shrink-0 h-10 w-10">
                         <img
                           className="h-10 w-10 rounded-full"
-                          src="https://randomuser.me/api/portraits/men/32.jpg"
+                          src="/blank-profile-picture-973460_960_720.webp"
                           alt=""
                         />
                       </div>
@@ -75,7 +75,7 @@ export default function DashboardHome() {
                       <div className="flex-shrink-0 h-10 w-10">
                         <img
                           className="h-10 w-10 rounded-full"
-                          src="https://randomuser.me/api/portraits/women/44.jpg"
+                          src="/blank-profile-picture-973460_960_720.webp"
                           alt=""
                         />
                       </div>
@@ -111,7 +111,7 @@ export default function DashboardHome() {
                       <div className="flex-shrink-0 h-10 w-10">
                         <img
                           className="h-10 w-10 rounded-full"
-                          src="https://randomuser.me/api/portraits/men/75.jpg"
+                          src="/blank-profile-picture-973460_960_720.webp"
                           alt=""
                         />
                       </div>
@@ -225,5 +225,5 @@ export default function DashboardHome() {
 }
 
 export async function Loader() {
-  console.log("The loader is working");
+  return { role: "Admin" };
 }

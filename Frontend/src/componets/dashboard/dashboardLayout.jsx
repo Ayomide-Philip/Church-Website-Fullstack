@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, redirect } from "react-router-dom";
 import SideBar from "./sidebar";
 import DashboardHeader from "./header";
 export default function DashboardLayout() {
@@ -14,4 +14,28 @@ export default function DashboardLayout() {
       </div>
     </div>
   );
+}
+
+export async function Loader() {
+  const userInformation = JSON.parse(localStorage.getItem("userInformation"));
+  if (!userInformation) {
+    return redirect("/login");
+  }
+  try {
+    const { token } = userInformation;
+    const response = await fetch("http://localhost:3000/users/me", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const serverResponse = await response.json();
+    if (!serverResponse.success) {
+      return redirect("/login");
+    }
+    return serverResponse.data;
+  } catch (err) {
+    console.log(err);
+  }
 }
