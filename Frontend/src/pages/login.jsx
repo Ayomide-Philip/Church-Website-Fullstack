@@ -106,16 +106,16 @@ export async function Action({ request }) {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-
+  // try breaking the data using the built in React-router-dom and getting the email and password
   try {
     const response = await fetch("http://localhost:3000/admin/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
     });
+    // making a request to the backend
     const responseData = await response.json();
-    console.log(responseData);
-
+    // converting the info recived to a json format
     if (!responseData.success) {
       if (responseData.error.includes("User")) {
         return { email: true };
@@ -124,7 +124,9 @@ export async function Action({ request }) {
         return { password: true };
       }
     }
+    // after verifying the user and the token and success is set true, i add it to my localstorage
     localStorage.setItem("userInformation", JSON.stringify(responseData.data));
+    //  redirecting the user to the dashboard
     return redirect("/dashboard");
   } catch (error) {
     console.log(error.message);
