@@ -74,7 +74,7 @@ export async function login(req, res, next) {
     });
 
     // return the user details and token if the password and emails are valid
-    res.status(200).json({ success: true, data: { token, users: userExist } });
+    res.status(200).json({ success: true, data: { token, user: {id : userExist._id} } });
   } catch (err) {
     next(err);
   }

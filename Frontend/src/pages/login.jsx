@@ -1,8 +1,7 @@
-import { Form, useActionData } from "react-router-dom";
+import { Form, redirect, useActionData } from "react-router-dom";
 
 export default function Login() {
   const error = useActionData();
-  console.log(error);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 px-6">
@@ -107,7 +106,6 @@ export async function Action({ request }) {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-  console.log(email, password);
 
   try {
     const response = await fetch("http://localhost:3000/admin/auth/login", {
@@ -125,8 +123,9 @@ export async function Action({ request }) {
       if (responseData.error.includes("Password")) {
         return { password: true };
       }
-      console.log(responseData);
     }
+    localStorage.setItem("userInformation", JSON.stringify(responseData.data));
+    return redirect("/dashboard");
   } catch (error) {
     console.log(error.message);
   }
