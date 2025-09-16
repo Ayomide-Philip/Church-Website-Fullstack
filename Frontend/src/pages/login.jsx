@@ -108,7 +108,7 @@ export async function Action({ request }) {
   const password = formData.get("password");
   // try breaking the data using the built in React-router-dom and getting the email and password
   try {
-    const response = await fetch("http://localhost:3000/admin/auth/login", {
+    const response = await fetch("http://localhost:3000/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },

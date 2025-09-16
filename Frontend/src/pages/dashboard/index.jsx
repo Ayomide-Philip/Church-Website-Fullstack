@@ -223,3 +223,7 @@ export default function DashboardHome() {
     </>
   );
 }
+
+export async function Loader() {
+  console.log("The loader is working");
+}

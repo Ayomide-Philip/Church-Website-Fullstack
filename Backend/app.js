@@ -6,6 +6,7 @@ import { errorHandler } from "./middleware/error.middleware.js";
 import leaderRouter from "./router/leaders.router.js";
 import feedbackRouter from "./router/feedback.router.js";
 import cors from "cors";
+import userRouter from "./router/user.router.js";
 const app = express();
 connectToDatabase();
 const corsOptions = {
@@ -16,9 +17,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/admin/auth", authRouter);
+app.use("/auth", authRouter);
 app.use("/leaders", leaderRouter);
 app.use("/feedback", feedbackRouter);
+app.use("/users", userRouter)
 app.use(errorHandler);
 
 app.get("/", (req, res) => {
