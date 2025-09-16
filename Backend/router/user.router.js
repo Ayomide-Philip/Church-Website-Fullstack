@@ -1,9 +1,9 @@
-import {Router} from "express";
+import { Router } from "express";
+import { getAllUsers, getUserById } from "../controller/user.controller.js";
 
 const userRouter = new Router();
 
-userRouter.get("/", (req, res) => {
-    res.json({message:"All users retrieved"});
-})
+userRouter.get("/", getAllUsers);
+userRouter.get("/:id", getUserById);
 
-export default  userRouter;
+export default userRouter;
