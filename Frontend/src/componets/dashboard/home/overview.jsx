@@ -1,12 +1,15 @@
 /* eslint-disable no-unused-vars */
 import { Calendar, MessageCircle, User2, Users } from "lucide-react";
-const overview = [
-  { title: "Leaders", number: 120, logo: User2 },
-  { title: "Members", number: 84, logo: Users },
-  { title: "Blog", number: 50, logo: Calendar },
-  { title: "Message", number: 100, logo: MessageCircle },
-];
+import { useLoaderData } from "react-router-dom";
+
 export default function DashboardOverview() {
+  const { leaders } = useLoaderData();
+  const overview = [
+    { title: "Leaders", number: leaders.length, logo: User2 },
+    { title: "Members", number: 84, logo: Users },
+    { title: "Blog", number: 50, logo: Calendar },
+    { title: "Message", number: 100, logo: MessageCircle },
+  ];
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
       {overview.map(({ title, number, logo: Icon }, idx) => {
@@ -18,7 +21,7 @@ export default function DashboardOverview() {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-black">{title}</p>
-                <p className="text-2xl font-semibold text-gray-800">{number.toLocaleString()}</p>
+                <p className="text-2xl font-semibold text-gray-800">{number}</p>
               </div>
             </div>
           </div>

@@ -63,10 +63,10 @@ export default function DashboardHome() {
                           {description}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {createdAt}
+                          {new Date(createdAt).toLocaleDateString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {updatedAt}
+                          {new Date(updatedAt).toLocaleDateString()}
                         </td>
                       </tr>
                     );
