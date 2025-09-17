@@ -18,7 +18,7 @@ export default function DashboardOverview() {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-black">{title}</p>
-                <p className="text-2xl font-semibold text-gray-800">{number}</p>
+                <p className="text-2xl font-semibold text-gray-800">{number.toLocaleString()}</p>
               </div>
             </div>
           </div>
