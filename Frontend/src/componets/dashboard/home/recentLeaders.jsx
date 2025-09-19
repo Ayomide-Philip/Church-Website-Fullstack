@@ -2,6 +2,14 @@ import { useLoaderData } from "react-router-dom";
 
 export default function RecentLeaders({ heading, limit }) {
   const { leaders } = useLoaderData();
+  const tableHeader = [
+    "Name",
+    "Roles",
+    "Descriptions",
+    "  Created At",
+    " Updated At",
+    "Actions",
+  ];
   return (
     <div className="lg:col-span-2 bg-white rounded-lg shadow overflow-hidden">
       <div className="px-6 py-4 border-b border-gray-200">
@@ -11,21 +19,17 @@ export default function RecentLeaders({ heading, limit }) {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Name
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Roles
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Descriptions
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Created At
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Updated At
-              </th>
+              {tableHeader.map((heading, idx) => {
+                return (
+                  <th
+                    key={idx}
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    {heading}
+                  </th>
+                );
+              })}
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -60,6 +64,17 @@ export default function RecentLeaders({ heading, limit }) {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {new Date(updatedAt).toLocaleDateString()}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap  text-sm font-medium">
+                      <a
+                        href="#"
+                        className="text-blue-600 hover:text-blue-900 mr-3"
+                      >
+                        Edit
+                      </a>
+                      <a href="#" className="text-red-600 hover:text-red-900">
+                        Delete
+                      </a>
                     </td>
                   </tr>
                 );

@@ -1,12 +1,14 @@
 import RecentLeaders from "../../componets/dashboard/home/recentLeaders";
 import { redirect } from "react-router-dom";
 import NewButton from "../../componets/dashboard/newButton";
+import NewLeadersForm from "../../componets/dashboard/leaders/form";
 
 export default function DashboardLeader() {
   return (
     <>
       <RecentLeaders heading="The Church Leaders" />
       <NewButton />
+      <NewLeadersForm />
     </>
   );
 }
