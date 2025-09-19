@@ -1,14 +1,12 @@
-import { Plus } from "lucide-react";
 import RecentLeaders from "../../componets/dashboard/home/recentLeaders";
 import { redirect } from "react-router-dom";
+import NewButton from "../../componets/dashboard/newButton";
 
 export default function DashboardLeader() {
   return (
     <>
       <RecentLeaders heading="The Church Leaders" />
-      <button className="flex fixed bottom-8 right-7 bg-blue-700 p-3 rounded-full">
-        <Plus color="white" />
-      </button>
+      <NewButton />
     </>
   );
 }
