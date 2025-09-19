@@ -7,7 +7,7 @@ export default function DashboardHome() {
     <>
       <DashboardOverview />
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        <RecentLeaders />
+        <RecentLeaders heading="Recent Leaders Added" limit={2} />
         <div className="bg-white rounded-lg shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200">
             <h2 className="text-lg font-semibold text-gray-800">Room Status</h2>

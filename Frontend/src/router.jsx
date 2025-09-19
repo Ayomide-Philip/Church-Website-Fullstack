@@ -10,7 +10,9 @@ import DashboardLayout, {
 } from "./componets/dashboard/dashboardLayout";
 import Login, { Action as FormAction } from "./pages/login";
 import DashboardMembers from "./pages/dashboard/members";
-import DashboardLeader from "./pages/dashboard/leaders";
+import DashboardLeader, {
+  Loader as LeadersLoader,
+} from "./pages/dashboard/leaders";
 export default function PageRouter() {
   return (
     <RouterProvider
@@ -42,6 +44,7 @@ export default function PageRouter() {
             {
               element: <DashboardLeader />,
               path: "leaders",
+              loader: LeadersLoader,
             },
           ],
         },

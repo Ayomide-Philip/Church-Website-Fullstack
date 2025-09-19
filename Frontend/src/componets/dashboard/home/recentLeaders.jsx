@@ -1,11 +1,11 @@
 import { useLoaderData } from "react-router-dom";
 
-export default function RecentLeaders() {
+export default function RecentLeaders({ heading, limit }) {
   const { leaders } = useLoaderData();
   return (
     <div className="lg:col-span-2 bg-white rounded-lg shadow overflow-hidden">
       <div className="px-6 py-4 border-b border-gray-200">
-        <h2 className="text-lg font-semibold text-gray-800">Recent Leaders</h2>
+        <h2 className="text-lg font-semibold text-gray-800">{heading}</h2>
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
@@ -29,8 +29,8 @@ export default function RecentLeaders() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {leaders.map(
-              ({ name, role, createdAt, description, updatedAt }, idx) => {
+            {leaders
+              .map(({ name, role, createdAt, description, updatedAt }, idx) => {
                 return (
                   <tr key={idx}>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -63,8 +63,8 @@ export default function RecentLeaders() {
                     </td>
                   </tr>
                 );
-              }
-            )}
+              })
+              .slice(0, limit ? limit : leaders.length)}
           </tbody>
         </table>
       </div>
