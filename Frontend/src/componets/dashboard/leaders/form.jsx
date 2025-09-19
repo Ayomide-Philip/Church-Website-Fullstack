@@ -1,15 +1,18 @@
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function NewLeadersForm() {
   const navigate = useNavigate();
+
+  // State to manage which tab is active
+  const [activeTab, setActiveTab] = useState("url"); // 'url' for Image URL tab, 'file' for File Upload tab
+
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md bg-opacity-30">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl mt-16 mb-16 relative">
         <button
-          onClick={() => {
-            navigate(-1);
-          }}
+          onClick={() => navigate(-1)}
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-900 focus:outline-none cursor-pointer"
         >
           <span className="text-2xl">
@@ -48,7 +51,7 @@ export default function NewLeadersForm() {
             <input
               id="role"
               name="role"
-              type="role"
+              type="text"
               required
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             />
@@ -70,50 +73,90 @@ export default function NewLeadersForm() {
             />
           </div>
 
+          {/* Tab Section for Image URL and File Upload */}
           <div className="mb-4">
-            <label
-              htmlFor="cover-photo"
-              className="block text-sm font-medium text-black"
-            >
+            <label className="block text-sm font-medium text-black">
               Upload Photo:
             </label>
-            <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-5">
-              <div className="text-center">
-                <svg
-                  className="mx-auto h-12 w-12 text-gray-300"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                  <label
-                    htmlFor="file-upload"
-                    className="relative cursor-pointer rounded-md bg-white font-semibold text-blue-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 hover:text-blue-500"
-                  >
-                    <span>Upload a file</span>
-                    <input
-                      id="file-upload"
-                      name="file-upload"
-                      type="file"
-                      className="sr-only"
-                    />
-                  </label>
-                  <p className="pl-1">or drag and drop</p>
-                </div>
-                <p className="text-xs leading-5 text-gray-600">
-                  PNG, JPG, GIF up to 10MB
-                </p>
-              </div>
+
+            {/* Tab Buttons */}
+            <div className="flex space-x-4 mb-2">
+              <button
+                type="button"
+                onClick={() => setActiveTab("url")}
+                className={`px-4 py-2 rounded-md ${
+                  activeTab === "url"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200 text-gray-800"
+                }`}
+              >
+                Image URL
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("file")}
+                className={`px-4 py-2 rounded-md ${
+                  activeTab === "file"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200 text-gray-800"
+                }`}
+              >
+                File Upload
+              </button>
             </div>
+
+            {activeTab === "url" ? (
+              <div className="mb-4">
+                <label
+                  htmlFor="imageUrl"
+                  className="block text-sm font-medium text-black"
+                ></label>
+                <input
+                  id="imageUrl"
+                  name="imageUrl"
+                  type="text"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="Enter Image URL"
+                />
+              </div>
+            ) : (
+              <div className="flex justify-center rounded-lg border border-dashed border-gray-900/25 px-3 py-3">
+                <div className="text-center">
+                  <svg
+                    className="mx-auto h-12 w-12 text-gray-300"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                    <label
+                      htmlFor="file-upload"
+                      className="relative cursor-pointer rounded-md bg-white font-semibold text-blue-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 hover:text-blue-500"
+                    >
+                      <span>Upload a file</span>
+                      <input
+                        id="file-upload"
+                        name="file-upload"
+                        type="file"
+                        className="sr-only"
+                      />
+                    </label>
+                    <p className="pl-1">or drag and drop</p>
+                  </div>
+                  <p className="text-xs leading-5 text-gray-600">
+                    PNG, JPG, GIF up to 10MB
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Submit Button */}
           <div className="mt-6 flex justify-end">
             <button
               type="submit"
