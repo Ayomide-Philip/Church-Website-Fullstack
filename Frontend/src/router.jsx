@@ -13,6 +13,7 @@ import DashboardMembers from "./pages/dashboard/members";
 import DashboardLeader, {
   Loader as LeadersLoader,
 } from "./pages/dashboard/leaders";
+import NewLeadersForm from "./componets/dashboard/leaders/form";
 export default function PageRouter() {
   return (
     <RouterProvider
@@ -28,7 +29,7 @@ export default function PageRouter() {
         },
         {
           id: "dashboard",
-          path: "/dashboard",
+          path: "dashboard",
           element: <DashboardLayout />,
           loader: DashboardLayoutLoader,
           children: [
@@ -37,14 +38,20 @@ export default function PageRouter() {
               index: true,
               loader: DashboardHomeLoader,
             },
+            { element: <DashboardMembers />, path: "members" },
             {
-              element: <DashboardMembers />,
-              path: "members",
-            },
-            {
-              element: <DashboardLeader />,
               path: "leaders",
-              loader: LeadersLoader,
+              children: [
+                {
+                  element: <DashboardLeader />,
+                  index: true,
+                  loader: LeadersLoader,
+                },
+                {
+                  element: <NewLeadersForm />,
+                  path: "new",
+                },
+              ],
             },
           ],
         },

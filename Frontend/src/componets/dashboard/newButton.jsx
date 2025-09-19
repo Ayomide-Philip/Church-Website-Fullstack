@@ -1,8 +1,12 @@
 import { Plus } from "lucide-react";
-export default function NewButton() {
+
+export default function NewButton({ onClick }) {
   return (
-    <button className="flex fixed bottom-8 right-7 bg-blue-700 p-3 rounded-full">
+    <a
+      href={`/dashboard/leaders${onClick}`}
+      className="flex fixed bottom-8 right-7 bg-blue-700 p-3 rounded-full cursor-pointer"
+    >
       <Plus color="white" />
-    </button>
+    </a>
   );
 }

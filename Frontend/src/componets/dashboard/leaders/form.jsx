@@ -1,18 +1,15 @@
 import { X } from "lucide-react";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function NewLeadersForm() {
-  const [isOpen, setIsOpen] = useState(true);
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-  if (!isOpen) return null;
+  const navigate = useNavigate();
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md bg-opacity-30">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl mt-16 mb-16 relative">
         <button
-          onClick={handleClose}
+          onClick={() => {
+            navigate(-1);
+          }}
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-900 focus:outline-none cursor-pointer"
         >
           <span className="text-2xl">
