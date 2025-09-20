@@ -13,7 +13,9 @@ import DashboardMembers from "./pages/dashboard/members";
 import DashboardLeader, {
   Loader as LeadersLoader,
 } from "./pages/dashboard/leaders";
-import NewLeadersForm from "./componets/dashboard/leaders/form";
+import NewLeadersForm, {
+  Action as NewLeaderAction,
+} from "./componets/dashboard/leaders/form";
 export default function PageRouter() {
   return (
     <RouterProvider
@@ -50,6 +52,7 @@ export default function PageRouter() {
                 {
                   element: <NewLeadersForm />,
                   path: "new",
+                  action: NewLeaderAction,
                 },
               ],
             },

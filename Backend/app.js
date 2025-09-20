@@ -7,7 +7,9 @@ import leaderRouter from "./router/leaders.router.js";
 import feedbackRouter from "./router/feedback.router.js";
 import cors from "cors";
 import userRouter from "./router/user.router.js";
+import multer from "multer";
 const app = express();
+const upload = multer({dest: "uploads/"});
 connectToDatabase();
 const corsOptions = {
   origin: FRONTEND_URL, // Change this to your frontend's URL

@@ -1,34 +1,31 @@
 import { X } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Form, useNavigate } from "react-router-dom";
 
 export default function NewLeadersForm() {
   const navigate = useNavigate();
 
-  // State to manage which tab is active
-  const [activeTab, setActiveTab] = useState("url"); // 'url' for Image URL tab, 'file' for File Upload tab
-
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md bg-opacity-30">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl mt-16 mb-16 relative">
+      <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-lg mt-16 mb-16 relative">
         <button
           onClick={() => navigate(-1)}
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-900 focus:outline-none cursor-pointer"
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 focus:outline-none cursor-pointer"
         >
           <span className="text-2xl">
             <X />
           </span>
         </button>
 
-        <h2 className="text-xl font-semibold text-center text-gray-900 mb-4">
+        <h2 className="text-2xl font-semibold text-center text-gray-900 mb-6">
           New Leader Form
         </h2>
 
-        <form>
-          <div className="mb-4">
+        <Form method="post" encType="multipart/form-data">
+          {/* Name Field */}
+          <div className="mb-5">
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-black"
+              className="block text-sm font-medium text-gray-700"
             >
               Name:
             </label>
@@ -36,15 +33,15 @@ export default function NewLeadersForm() {
               id="name"
               name="name"
               type="text"
-              required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm"
             />
           </div>
 
-          <div className="mb-4">
+          {/* Role Field */}
+          <div className="mb-5">
             <label
               htmlFor="role"
-              className="block text-sm font-medium text-black"
+              className="block text-sm font-medium text-gray-700"
             >
               Role:
             </label>
@@ -52,121 +49,91 @@ export default function NewLeadersForm() {
               id="role"
               name="role"
               type="text"
-              required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm"
             />
           </div>
 
-          <div className="mb-4">
+          {/* Description Field */}
+          <div className="mb-5">
             <label
               htmlFor="description"
-              className="block text-sm font-medium text-black"
+              className="block text-sm font-medium text-gray-700"
             >
               Description:
             </label>
             <textarea
               id="description"
               name="description"
-              rows="3"
-              required
-              className="mt-1 block w-full resize-none px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              rows="4"
+              className="mt-1 block w-full resize-none px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm"
             />
           </div>
 
           {/* Tab Section for Image URL and File Upload */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-black">
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700">
               Upload Photo:
             </label>
 
-            {/* Tab Buttons */}
-            <div className="flex space-x-4 mb-2">
-              <button
-                type="button"
-                onClick={() => setActiveTab("url")}
-                className={`px-4 py-2 rounded-md ${
-                  activeTab === "url"
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-200 text-gray-800"
-                }`}
+            <div className="border-dashed border-2 border-gray-300 rounded-lg p-6 flex justify-center items-center space-x-4">
+              <svg
+                className="h-12 w-12 text-gray-400"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
               >
-                Image URL
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab("file")}
-                className={`px-4 py-2 rounded-md ${
-                  activeTab === "file"
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-200 text-gray-800"
-                }`}
-              >
-                File Upload
-              </button>
-            </div>
-
-            {activeTab === "url" ? (
-              <div className="mb-4">
-                <label
-                  htmlFor="imageUrl"
-                  className="block text-sm font-medium text-black"
-                ></label>
-                <input
-                  id="imageUrl"
-                  name="imageUrl"
-                  type="text"
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  placeholder="Enter Image URL"
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4v16m8-8H4"
                 />
+              </svg>
+              <div className="text-center">
+                <label
+                  htmlFor="file-upload"
+                  className="cursor-pointer text-sm font-medium text-blue-600 hover:text-blue-700"
+                >
+                  Upload a file
+                  <input
+                    id="file-upload"
+                    name="file-upload"
+                    type="file"
+                    className="sr-only"
+                    accept="image/*"
+                  />
+                </label>
+                <p className="text-xs text-gray-600 mt-1">
+                  PNG, JPG, GIF up to 10MB
+                </p>
               </div>
-            ) : (
-              <div className="flex justify-center rounded-lg border border-dashed border-gray-900/25 px-3 py-3">
-                <div className="text-center">
-                  <svg
-                    className="mx-auto h-12 w-12 text-gray-300"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                    <label
-                      htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md bg-white font-semibold text-blue-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 hover:text-blue-500"
-                    >
-                      <span>Upload a file</span>
-                      <input
-                        id="file-upload"
-                        name="file-upload"
-                        type="file"
-                        className="sr-only"
-                      />
-                    </label>
-                    <p className="pl-1">or drag and drop</p>
-                  </div>
-                  <p className="text-xs leading-5 text-gray-600">
-                    PNG, JPG, GIF up to 10MB
-                  </p>
-                </div>
-              </div>
-            )}
+            </div>
           </div>
 
+          {/* Submit Button */}
           <div className="mt-6 flex justify-end">
             <button
               type="submit"
-              className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="inline-flex justify-center rounded-md bg-blue-600 py-2 px-6 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               Submit
             </button>
           </div>
-        </form>
+        </Form>
       </div>
     </div>
   );
+}
+
+export async function Action({ request }) {
+  const formData = await request.formData();
+
+  const name = formData.get("name");
+  const role = formData.get("role");
+  const description = formData.get("description");
+  const fileUpload = formData.get("file-upload");
+
+  console.log(name, role, description, fileUpload);
 }
