@@ -12,9 +12,9 @@ const app = express();
 const upload = multer({dest: "uploads/"});
 connectToDatabase();
 const corsOptions = {
-  origin: FRONTEND_URL, // Change this to your frontend's URL
-  methods: "GET,POST,PUT,DELETE", // Specify allowed methods
-  allowedHeaders: "Content-Type, Authorization", // Allow these headers
+  origin: FRONTEND_URL,
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type, Authorization",
 };
 app.use(cors(corsOptions));
 app.use(express.json());

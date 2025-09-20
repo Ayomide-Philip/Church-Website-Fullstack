@@ -1,34 +1,52 @@
 import { Leaders } from "../models/leaders.models.js";
+import cloudinary from "../config/cloudinary.config.js";
 
 export async function createLeader(req, res, next) {
-    console.log(req.body)
-  // try {
-  //   const { id } = req.user;
-  //   // destructuring the request body
-  //   const { name, role, description, imageUrl } = req.body;
-  //   // check if the required thing needed are passed
-  //   if (name === undefined || role === undefined || description === undefined) {
-  //     return res
-  //       .status(400)
-  //       .send({ success: false, message: "Inputs required" });
-  //   }
-  //   // if required fields are passed add them to the db
-  //   const newLeader = await Leaders.create({
-  //     name,
-  //     role,
-  //     description,
-  //     imageUrl,
-  //     creatorId: id,
-  //   });
-  //   return res.status(201).send({ success: true, data: { leader: newLeader } });
-  // } catch (err) {
-  //      if (err.code && err.code === 11000) {
-  //     return res
-  //       .status(400)
-  //       .send({ success: false, message: "Role is the same as previous" });
-  //   }
-  //   next(err);
-  // }
+  if (!req.file) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Image is required" });
+  }
+  try {
+    const data = await cloudinary.uploader.upload(
+      req.file.path,
+      (error, data) => {
+        if (error) {
+          console.log(error);
+          return res
+            .status(400)
+            .json({ success: false, message: error.message });
+        }
+        return data;
+      }
+    );
+
+    const { id } = req.user;
+    // destructuring the request body
+    const { name, role, description } = req.body;
+    // check if the required thing needed are passed
+    if (name === undefined || role === undefined || description === undefined) {
+      return res
+        .status(400)
+        .send({ success: false, message: "Inputs required" });
+    }
+    // if required fields are passed add them to the db
+    const newLeader = await Leaders.create({
+      name,
+      role,
+      description,
+      imageUrl:data.secure_url,
+      creatorId: id,
+    });
+    return res.status(201).send({ success: true, data: { leader: newLeader } });
+  } catch (err) {
+    if (err.code && err.code === 11000) {
+      return res
+        .status(400)
+        .send({ success: false, message: "Role is the same as previous" });
+    }
+    next(err);
+  }
 }
 
 export async function getAllLeaders(req, res, next) {
@@ -74,8 +92,8 @@ export async function editParticularUser(req, res, next) {
         .send({ success: false, message: "No leader found with that Id" });
     }
     // change the detail about the leader that changed
-      let edited = false;
-      if (name !== undefined && name !== editedLeader.name) {
+    let edited = false;
+    if (name !== undefined && name !== editedLeader.name) {
       editedLeader.name = name;
       edited = true;
     }
@@ -93,7 +111,9 @@ export async function editParticularUser(req, res, next) {
     }
 
     if (!edited) {
-        return res.status(404).send({ success: false, message: "No field was edited" });
+      return res
+        .status(404)
+        .send({ success: false, message: "No field was edited" });
     }
     await editedLeader.save();
     res.status(200).send({ success: true, data: { leader: editedLeader } });
@@ -102,24 +122,28 @@ export async function editParticularUser(req, res, next) {
   }
 }
 
-export async function deleteParticularLeader(req, res , next){
-    try {
-        const {leaderId} = req.params;
-        // find the leader with the particular id
-        const leader = await Leaders.findById(leaderId)
-        //if no leader is found it should return an error
-        if (!leader){
-            return res.status(404).send({ success: false, error: "No leader found with that Id" });
-        }
-
-        const deletingLeader = await Leaders.deleteOne({_id : leaderId})
-        console.log(deletingLeader);
-
-        if (deletingLeader.acknowledged === false) {
-            return res.status(400).json({success: false, error:"Unable to delete user"});
-        }
-        res.status(200).send({ success: true, message:"Delete user successful" });
-    }catch(err){
-        next(err)
+export async function deleteParticularLeader(req, res, next) {
+  try {
+    const { leaderId } = req.params;
+    // find the leader with the particular id
+    const leader = await Leaders.findById(leaderId);
+    //if no leader is found it should return an error
+    if (!leader) {
+      return res
+        .status(404)
+        .send({ success: false, error: "No leader found with that Id" });
     }
+
+    const deletingLeader = await Leaders.deleteOne({ _id: leaderId });
+    console.log(deletingLeader);
+
+    if (deletingLeader.acknowledged === false) {
+      return res
+        .status(400)
+        .json({ success: false, error: "Unable to delete user" });
+    }
+    res.status(200).send({ success: true, message: "Delete user successful" });
+  } catch (err) {
+    next(err);
+  }
 }
