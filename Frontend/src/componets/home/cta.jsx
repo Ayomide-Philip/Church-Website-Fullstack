@@ -13,8 +13,12 @@ export default function Cta() {
               <p className="mt-2 text-2xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
                 {cta.heading}
               </p>
-              {cta.paragraph.map((p) => {
-                return <p className="mt-6 text-lg/8 text-gray-600">{p}</p>;
+              {cta.paragraph.map((p, idx) => {
+                return (
+                  <p key={idx} className="mt-6 text-lg/8 text-gray-600">
+                    {p}
+                  </p>
+                );
               })}
             </div>
           </div>

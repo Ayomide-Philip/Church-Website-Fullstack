@@ -8,17 +8,6 @@ export async function createLeader(req, res, next) {
       .json({ success: false, message: "Image is required" });
   }
   try {
-    const data = await cloudinary.uploader.upload(
-      req.file.path,
-      (error, data) => {
-        if (error) {
-          return res.status(error.http_code || 500).json({ success: false, message: error.message });
-        }
-          console.log(data);
-        return data;
-      }
-    );
-
     const { id } = req.user;
     // destructuring the request body
     const { name, role, description } = req.body;
@@ -26,8 +15,23 @@ export async function createLeader(req, res, next) {
     if (name === undefined || role === undefined || description === undefined) {
       return res
         .status(400)
-        .send({ success: false, message: "Inputs required" });
+        .json({ success: false, message: "Inputs required" });
     }
+    const data = await cloudinary.uploader.upload(
+      req.file.path,
+      (error, data) => {
+        if (error) {
+          return res
+            .status(error.http_code || 500)
+            .json({
+              success: false,
+              message: error.message || "Network Error",
+            });
+        }
+        return data;
+      }
+    );
+
     // if required fields are passed add them to the db
     const newLeader = await Leaders.create({
       name,
@@ -36,12 +40,12 @@ export async function createLeader(req, res, next) {
       imageUrl: data.secure_url,
       creatorId: id,
     });
-    return res.status(201).send({ success: true, data: { leader: newLeader } });
+    return res.status(201).json({ success: true, data: { leader: newLeader } });
   } catch (err) {
     if (err.code && err.code === 11000) {
       return res
         .status(400)
-        .send({ success: false, message: "Role is the same as previous" });
+        .json({ success: false, message: "Role is the same as previous" });
     }
     next(err);
   }
@@ -49,7 +53,7 @@ export async function createLeader(req, res, next) {
 
 export async function getAllLeaders(req, res, next) {
   try {
-    const allUsers = await Leaders.find().populate("creatorId","-password -updatedAt");
+    const allUsers = await Leaders.find().populate("creatorId", "fullName");
     return res.status(200).json({ success: true, data: { leaders: allUsers } });
   } catch (err) {
     next(err);
@@ -65,12 +69,12 @@ export async function getParticularLeader(req, res, next) {
     if (!checkLeader) {
       return res
         .status(404)
-        .send({ success: false, message: "No leader found with that Id" });
+        .json({ success: false, message: "No leader found with that Id" });
     }
     // return the leader if it exists
     return res
       .status(200)
-      .send({ success: true, data: { leader: checkLeader } });
+      .json({ success: true, data: { leader: checkLeader } });
   } catch (err) {
     next(err);
   }
@@ -87,7 +91,7 @@ export async function editParticularUser(req, res, next) {
     if (!editedLeader) {
       return res
         .status(404)
-        .send({ success: false, message: "No leader found with that Id" });
+        .json({ success: false, message: "No leader found with that Id" });
     }
     // change the detail about the leader that changed
     let edited = false;
@@ -111,10 +115,10 @@ export async function editParticularUser(req, res, next) {
     if (!edited) {
       return res
         .status(404)
-        .send({ success: false, message: "No field was edited" });
+        .json({ success: false, message: "No field was edited" });
     }
     await editedLeader.save();
-    res.status(200).send({ success: true, data: { leader: editedLeader } });
+    res.status(200).json({ success: true, data: { leader: editedLeader } });
   } catch (err) {
     next(err);
   }
@@ -129,7 +133,7 @@ export async function deleteParticularLeader(req, res, next) {
     if (!leader) {
       return res
         .status(404)
-        .send({ success: false, error: "No leader found with that Id" });
+        .json({ success: false, error: "No leader found with that Id" });
     }
 
     const deletingLeader = await Leaders.deleteOne({ _id: leaderId });
@@ -140,7 +144,7 @@ export async function deleteParticularLeader(req, res, next) {
         .status(400)
         .json({ success: false, error: "Unable to delete user" });
     }
-    res.status(200).send({ success: true, message: "Delete user successful" });
+    res.status(200).json({ success: true, message: "Delete user successful" });
   } catch (err) {
     next(err);
   }
