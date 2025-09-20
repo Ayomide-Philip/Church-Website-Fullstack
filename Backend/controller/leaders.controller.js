@@ -1,5 +1,6 @@
 import { Leaders } from "../models/leaders.models.js";
 import cloudinary from "../config/cloudinary.config.js";
+import Image from "../models/images.models.js";
 
 export async function createLeader(req, res, next) {
   if (!req.file) {
@@ -17,29 +18,46 @@ export async function createLeader(req, res, next) {
         .status(400)
         .json({ success: false, message: "Inputs required" });
     }
-    const data = await cloudinary.uploader.upload(
-      req.file.path,
-      (error, data) => {
-        if (error) {
-          return res.status(error.http_code || 500).json({
-            success: false,
-            message: error.message || "Network Error",
-          });
-        }
-        return data;
-      }
-    );
+    const data = await cloudinary.uploader.upload(req.file.path);
+
+    if (!data) {
+      return res.status(400).json({ success: false, message: "Upload failed" });
+    }
+
+    const newImage = await Image.create({
+      secure_url: data.secure_url,
+      public_id: data.public_id,
+      signature: data.signature,
+      asset_id: data.asset_id,
+      original_filename: data.original_filename,
+    });
+    console.log(newImage);
 
     // if required fields are passed add them to the db
     const newLeader = await Leaders.create({
       name,
       role,
       description,
-      imageUrl: data.secure_url,
+      image: newImage._id,
       creatorId: id,
     });
     return res.status(201).json({ success: true, data: { leader: newLeader } });
   } catch (err) {
+    if (err.error && err.error.message) {
+      return res.status(err.error.http_code || 500).json({
+        success: false,
+        message: err.error.message || "Cloudinary Error",
+      });
+    }
+
+    if (err.http_code) {
+      // Just in case the error is not nested, but flat
+      return res.status(err.http_code || 500).json({
+        success: false,
+        message: err.message || "Cloudinary Error",
+      });
+    }
+
     if (err.code && err.code === 11000) {
       return res
         .status(400)
@@ -51,7 +69,9 @@ export async function createLeader(req, res, next) {
 
 export async function getAllLeaders(req, res, next) {
   try {
-    const allUsers = await Leaders.find().populate("creatorId", "fullName");
+    const allUsers = await Leaders.find()
+      .populate("creatorId", "fullName")
+      .populate("image", "secure_url original_filename");
     return res.status(200).json({ success: true, data: { leaders: allUsers } });
   } catch (err) {
     next(err);

@@ -23,10 +23,10 @@ const leadersModels = new mongoose.Schema(
       minlength: 20,
       maxlength: 1000,
     },
-    imageUrl: {
-      type: String,
-      minLength: 5,
-      maxLength: 2000,
+    image: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Image",
     },
     creatorId: {
       type: mongoose.Schema.Types.ObjectId,

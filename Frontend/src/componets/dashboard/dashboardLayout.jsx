@@ -1,18 +1,21 @@
 import { Outlet, redirect } from "react-router-dom";
 import SideBar from "./sidebar";
 import DashboardHeader from "./header";
+import { ToastContainer } from "react-toastify";
 export default function DashboardLayout() {
   return (
-    <div className="flex h-screen overflow-hidden">
-      <SideBar />
-      <div className="flex flex-col flex-1 overflow-hidden">
-        <DashboardHeader />
-
-        <main className="flex-1 overflow-y-auto p-3 bg-gray-100">
-          <Outlet />
-        </main>
+    <>
+      <ToastContainer />
+      <div className="flex h-screen overflow-hidden">
+        <SideBar />
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <DashboardHeader />
+          <main className="flex-1 overflow-y-auto p-3 bg-gray-100">
+            <Outlet />
+          </main>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

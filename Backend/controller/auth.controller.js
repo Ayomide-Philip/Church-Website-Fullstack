@@ -66,7 +66,7 @@ export async function login(req, res, next) {
     if (!isPasswordValid) {
       return res
         .status(400)
-        .json({ success: false, error: "Password does not match each other" });
+        .json({ success: false, error: "Incorrect Password" });
     }
     // if password is valid generate token
     const token = jwt.sign({ userId: userExist._id }, JSON_WEB_TOKEN_SECRET, {
