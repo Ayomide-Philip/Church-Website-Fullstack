@@ -20,8 +20,8 @@ const leadersModels = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      minlength: 3,
-      maxlength: 50,
+      minlength: 20,
+      maxlength: 1000,
     },
     imageUrl: {
       type: String,

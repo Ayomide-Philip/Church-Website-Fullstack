@@ -12,11 +12,9 @@ export async function createLeader(req, res, next) {
       req.file.path,
       (error, data) => {
         if (error) {
-          console.log(error);
-          return res
-            .status(400)
-            .json({ success: false, message: error.message });
+          return res.status(error.http_code || 500).json({ success: false, message: error.message });
         }
+          console.log(data);
         return data;
       }
     );
@@ -35,7 +33,7 @@ export async function createLeader(req, res, next) {
       name,
       role,
       description,
-      imageUrl:data.secure_url,
+      imageUrl: data.secure_url,
       creatorId: id,
     });
     return res.status(201).send({ success: true, data: { leader: newLeader } });
@@ -51,7 +49,7 @@ export async function createLeader(req, res, next) {
 
 export async function getAllLeaders(req, res, next) {
   try {
-    const allUsers = await Leaders.find();
+    const allUsers = await Leaders.find().populate("creatorId","-password -updatedAt");
     return res.status(200).json({ success: true, data: { leaders: allUsers } });
   } catch (err) {
     next(err);
