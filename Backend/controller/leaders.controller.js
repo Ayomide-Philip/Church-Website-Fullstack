@@ -21,12 +21,10 @@ export async function createLeader(req, res, next) {
       req.file.path,
       (error, data) => {
         if (error) {
-          return res
-            .status(error.http_code || 500)
-            .json({
-              success: false,
-              message: error.message || "Network Error",
-            });
+          return res.status(error.http_code || 500).json({
+            success: false,
+            message: error.message || "Network Error",
+          });
         }
         return data;
       }
