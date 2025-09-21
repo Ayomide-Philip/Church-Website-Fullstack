@@ -6,7 +6,7 @@ export async function createLeader(req, res, next) {
   if (!req.file) {
     return res
       .status(400)
-      .json({ success: false, message: "Image is required" });
+      .json({ success: false, error: "Image is required" });
   }
   try {
     const { id } = req.user;
@@ -16,18 +16,18 @@ export async function createLeader(req, res, next) {
     if (name === undefined || role === undefined || description === undefined) {
       return res
         .status(400)
-        .json({ success: false, message: "Inputs required" });
+        .json({ success: false, error: "Inputs required" });
     }
 
     const leadersExist = await Leaders.findOne({name, role})
       if (leadersExist) {
-          return res.status(400).json({success: false, message: "Leader already exists" });
+          return res.status(400).json({success: false, error: "Leader already exists" });
       }
 
     const data = await cloudinary.uploader.upload(req.file.path);
 
     if (!data) {
-      return res.status(400).json({ success: false, message: "Upload failed" });
+      return res.status(400).json({ success: false, error: "Upload failed" });
     }
 
     const newImage = await Image.create({
@@ -51,7 +51,7 @@ export async function createLeader(req, res, next) {
     if (err.error && err.error.message) {
       return res.status(err.error.http_code || 500).json({
         success: false,
-        message: err.error.message || "Cloudinary Error",
+        error: err.error.message || "Cloudinary Error",
       });
     }
 
@@ -59,14 +59,14 @@ export async function createLeader(req, res, next) {
       // Just in case the error is not nested, but flat
       return res.status(err.http_code || 500).json({
         success: false,
-        message: err.message || "Cloudinary Error",
+        error: err.message || "Cloudinary Error",
       });
     }
 
     if (err.code && err.code === 11000) {
       return res
         .status(400)
-        .json({ success: false, message: "Role is the same as previous" });
+        .json({ success: false, error: "Role is the same as previous" });
     }
     next(err);
   }

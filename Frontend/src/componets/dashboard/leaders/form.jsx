@@ -1,12 +1,16 @@
-import { X } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { Form, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { MdErrorOutline } from "react-icons/md";
 
 export default function NewLeadersForm() {
   const navigate = useNavigate();
+  const [imageSource, setImageSource] = useState(null);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md bg-opacity-30">
-      <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-lg mt-16 mb-16 relative">
+    <div className="inset-0 flex items-center justify-center z-50 backdrop-blur-md bg-opacity-30">
+      <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-lg mt-10 mb-10 relative">
         <button
           onClick={() => navigate(-1)}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 focus:outline-none cursor-pointer"
@@ -70,44 +74,50 @@ export default function NewLeadersForm() {
           </div>
 
           {/* Tab Section for Image URL and File Upload */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700">
-              Upload Photo:
+          <div className="mb-8">
+            <label className="block text-sm font-semibold text-gray-700 mb-3">
+              Upload Photo
             </label>
 
-            <div className="border-dashed border-2 border-gray-300 rounded-lg p-6 flex justify-center items-center space-x-4">
-              <svg
-                className="h-12 w-12 text-gray-400"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 4v16m8-8H4"
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
+              {imageSource ? (
+                <img
+                  src={URL.createObjectURL(imageSource)}
+                  alt={imageSource.name}
+                  className="h-32 w-32 rounded-md object-cover shadow-md"
+                  onLoad={() => URL.revokeObjectURL(imageSource)}
                 />
-              </svg>
-              <div className="text-center">
+              ) : (
+                <div className="flex items-center justify-center h-32 w-32 rounded-md bg-gray-100 text-gray-400">
+                  <Plus height={40} width={40} />
+                </div>
+              )}
+
+              <div className="text-center md:text-left">
                 <label
                   htmlFor="file-upload"
-                  className="cursor-pointer text-sm font-medium text-blue-600 hover:text-blue-700"
+                  className="inline-block cursor-pointer rounded-md  px-5 py-2 text-sm font-medium text-black hover:underline"
                 >
-                  Upload a file
+                  {imageSource ? "Change File" : "Select File"}
                   <input
                     id="file-upload"
-                    name="file-upload"
+                    name="imageUrl"
                     type="file"
                     className="sr-only"
                     accept="image/*"
+                    onChange={(e) => setImageSource(e.target.files[0])}
                   />
                 </label>
-                <p className="text-xs text-gray-600 mt-1">
+
+                <p className="mt-2 text-xs text-gray-500 max-w-xs">
                   PNG, JPG, GIF up to 10MB
                 </p>
+
+                {imageSource && (
+                  <p className="mt-4 text-green-600 font-semibold truncate max-w-xs">
+                    Selected file: {imageSource.name}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -128,12 +138,50 @@ export default function NewLeadersForm() {
 }
 
 export async function Action({ request }) {
+  const { token } = JSON.parse(localStorage.getItem("userInformation"));
   const formData = await request.formData();
 
-  const name = formData.get("name");
-  const role = formData.get("role");
-  const description = formData.get("description");
-  const fileUpload = formData.get("file-upload");
+  try {
+    const request = await fetch("http://localhost:3000/leaders", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
 
-  console.log(name, role, description, fileUpload);
+    const response = await request.json();
+    if (!response.success) {
+      toast.error(
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <strong style={{ fontSize: "1rem", marginBottom: "0.3rem" }}>
+            Something went wrong!
+          </strong>
+          <span>{response.error}</span>
+        </div>,
+        {
+          icon: <MdErrorOutline size={24} color="#ff4d4f" />, // Custom error icon
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          style: {
+            background: "#fff1f0",
+            color: "#cf1322",
+            border: "1px solid #ffa39e",
+            padding: "12px 16px",
+            borderRadius: "8px",
+            fontFamily: "Segoe UI, sans-serif",
+          },
+          progressStyle: {
+            background: "#ff7875",
+          },
+        }
+      );
+    }
+  } catch (err) {
+    console.log(err);
+  }
 }
