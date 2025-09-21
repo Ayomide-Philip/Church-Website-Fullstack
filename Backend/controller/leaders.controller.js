@@ -82,7 +82,9 @@ export async function getParticularLeader(req, res, next) {
   try {
     const { leaderId } = req.params;
     // check i the user exist
-    const checkLeader = await Leaders.findById(leaderId);
+    const checkLeader = await Leaders.findById(leaderId)
+      .populate("creatorId", "fullName")
+      .populate("image", "secure_url original_filename");
     // return an error if no user is found
     if (!checkLeader) {
       return res

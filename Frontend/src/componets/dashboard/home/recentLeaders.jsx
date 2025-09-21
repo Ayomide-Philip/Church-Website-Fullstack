@@ -2,11 +2,14 @@ import { useLoaderData } from "react-router-dom";
 
 export default function RecentLeaders({ heading, limit }) {
   const { leaders } = useLoaderData();
+  console.log(leaders);
+
   const tableHeader = [
     "Name",
     "Roles",
     "Descriptions",
-    "  Created At",
+    "Created By",
+    "Created At",
     " Updated At",
     "Actions",
   ];
@@ -34,51 +37,73 @@ export default function RecentLeaders({ heading, limit }) {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {leaders
-              .map(({ name, role, createdAt, description, updatedAt }, idx) => {
-                return (
-                  <tr key={idx}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 h-10 w-10">
-                          <img
-                            className="h-10 w-10 rounded-full"
-                            src="/blank-profile-picture-973460_960_720.webp"
-                            alt={name}
-                          />
-                        </div>
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">
-                            {name}
+              .map(
+                (
+                  {
+                    _id,
+                    name,
+                    role,
+                    createdAt,
+                    description,
+                    updatedAt,
+                    image: { secure_url, original_filename },
+                    creatorId,
+                  },
+                  idx
+                ) => {
+                  return (
+                    <tr key={idx}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0 h-10 w-10">
+                            <img
+                              className="h-10 w-10 rounded-full"
+                              src={secure_url}
+                              alt={original_filename}
+                            />
+                          </div>
+                          <div className="ml-4">
+                            <div className="text-sm font-medium text-gray-900">
+                              <a href={`/leaders/${_id}`}>{name}</a>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{role}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {description}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {new Date(createdAt).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {new Date(updatedAt).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap  text-sm font-medium">
-                      <a
-                        href="#"
-                        className="text-blue-600 hover:text-blue-900 mr-3"
-                      >
-                        Edit
-                      </a>
-                      <a href="#" className="text-red-600 hover:text-red-900">
-                        Delete
-                      </a>
-                    </td>
-                  </tr>
-                );
-              })
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900">{role}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {description}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <a
+                          href={`/users/${creatorId._id}`}
+                          className="hover:underline hover:text-black"
+                        >
+                          {creatorId.fullName}
+                        </a>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {new Date(createdAt).toLocaleDateString()}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {new Date(updatedAt).toLocaleDateString()}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap  text-sm font-medium">
+                        <a
+                          href="#"
+                          className="text-blue-600 hover:text-blue-900 mr-3"
+                        >
+                          Edit
+                        </a>
+                        <a href="#" className="text-red-600 hover:text-red-900">
+                          Delete
+                        </a>
+                      </td>
+                    </tr>
+                  );
+                }
+              )
               .slice(0, limit ? limit : leaders.length)}
           </tbody>
         </table>
