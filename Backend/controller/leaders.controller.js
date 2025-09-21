@@ -18,6 +18,12 @@ export async function createLeader(req, res, next) {
         .status(400)
         .json({ success: false, message: "Inputs required" });
     }
+
+    const leadersExist = await Leaders.findOne({name, role})
+      if (leadersExist) {
+          return res.status(400).json({success: false, message: "Leader already exists" });
+      }
+
     const data = await cloudinary.uploader.upload(req.file.path);
 
     if (!data) {
@@ -31,7 +37,6 @@ export async function createLeader(req, res, next) {
       asset_id: data.asset_id,
       original_filename: data.original_filename,
     });
-    console.log(newImage);
 
     // if required fields are passed add them to the db
     const newLeader = await Leaders.create({
