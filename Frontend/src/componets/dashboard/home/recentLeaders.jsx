@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+import NoLeaderFound from "../leaders/noLeaderFound";
 
 export default function RecentLeaders({ heading, limit }) {
   const { leaders } = useLoaderData();
@@ -18,12 +19,20 @@ export default function RecentLeaders({ heading, limit }) {
       <div className="px-6 py-4 border-b border-gray-200">
         <h2 className="text-lg font-semibold text-gray-800">{heading}</h2>
       </div>
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              {tableHeader.map((heading, idx) => {
-                return (
+
+      {leaders.length === 0 ? (
+        <NoLeaderFound
+          error="No Leaders Found"
+          message="You haven’t added any church leaders yet. Start building your leadership
+        directory by adding your first leader."
+          path="leaders/new"
+        />
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                {tableHeader.map((heading, idx) => (
                   <th
                     key={idx}
                     scope="col"
@@ -31,27 +40,26 @@ export default function RecentLeaders({ heading, limit }) {
                   >
                     {heading}
                   </th>
-                );
-              })}
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {leaders
-              .map(
-                (
-                  {
-                    _id,
-                    name,
-                    role,
-                    createdAt,
-                    description,
-                    updatedAt,
-                    image: { secure_url, original_filename },
-                    creatorId,
-                  },
-                  idx
-                ) => {
-                  return (
+                ))}
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {leaders
+                .slice(0, limit ?? leaders.length)
+                .map(
+                  (
+                    {
+                      _id,
+                      name,
+                      role,
+                      createdAt,
+                      description,
+                      updatedAt,
+                      image: { secure_url, original_filename },
+                      creatorId,
+                    },
+                    idx
+                  ) => (
                     <tr key={idx}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
@@ -89,7 +97,7 @@ export default function RecentLeaders({ heading, limit }) {
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {new Date(updatedAt).toLocaleDateString()}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap  text-sm font-medium">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <a
                           href="#"
                           className="text-blue-600 hover:text-blue-900 mr-3"
@@ -101,13 +109,12 @@ export default function RecentLeaders({ heading, limit }) {
                         </a>
                       </td>
                     </tr>
-                  );
-                }
-              )
-              .slice(0, limit ? limit : leaders.length)}
-          </tbody>
-        </table>
-      </div>
+                  )
+                )}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }
