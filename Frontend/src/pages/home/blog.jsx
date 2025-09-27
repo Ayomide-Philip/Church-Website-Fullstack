@@ -6,7 +6,7 @@ export default function Blog() {
   return (
     <div>
       <BlogImageBanner query={query} setQuery={setQuery} />
-      <BlogBody query={query} />
+      <BlogBody query={query} setQuery={setQuery} />
     </div>
   );
 }

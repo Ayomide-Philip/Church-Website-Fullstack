@@ -8,6 +8,7 @@ import feedbackRouter from "./router/feedback.router.js";
 import cors from "cors";
 import userRouter from "./router/user.router.js";
 import multer from "multer";
+import blogRouter from "./router/blog.router.js";
 const app = express();
 const upload = multer({dest: "uploads/"});
 connectToDatabase();
@@ -23,6 +24,7 @@ app.use("/auth", authRouter);
 app.use("/leaders", leaderRouter);
 app.use("/feedback", feedbackRouter);
 app.use("/users", userRouter)
+app.use("/blog", blogRouter)
 app.use(errorHandler);
 
 app.get("/", (req, res) => {
