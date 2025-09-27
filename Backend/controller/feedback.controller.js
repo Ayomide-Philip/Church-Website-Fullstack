@@ -22,23 +22,23 @@ export async function postNewFeedback(req, res, next) {
     if (email === undefined) {
       return res
         .status(400)
-        .send({ success: false, error: "Email is required" });
+        .json({ success: false, error: "Email is required" });
     }
     // check if the message is undefined
     if (message === undefined) {
       return res
         .status(400)
-        .send({ success: false, error: "Message is required" });
+        .json({ success: false, error: "Message is required" });
     }
     // if those conditions are passed, pass them to the backend
     const feedback = await Feedback.create({ email, message });
     // return the new feedback back
-    return res.status(200).send({ success: true, data: { feedback } });
+    return res.status(200).json({ success: true, data: { feedback } });
   } catch (err) {
     if (err.code && err.code === 11000) {
       return res
         .status(400)
-        .send({ success: false, error: "Message is the same as previous" });
+        .json({ success: false, error: "You have sent this feedback to us, we would work on it as soon as possible." });
     }
     next(err);
   }
