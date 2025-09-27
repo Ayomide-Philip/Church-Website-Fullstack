@@ -23,16 +23,16 @@ export default function DashboardStatus() {
         </h2>
       </div>
       <div className="p-3 pt-0 pb-5">
-        {status.map(({ title, details }) => {
+        {status.map(({ title, details }, idx) => {
           return (
-            <div className="mt-5">
+            <div key={idx} className="mt-5">
               <h3 className="text-md font-medium text-gray-800 mb-3">
                 {title}
               </h3>
               <div className="space-y-3">
-                {details.map(({ name, number }) => {
+                {details.map(({ name, number }, idx) => {
                   return (
-                    <div className="flex justify-between">
+                    <div key={idx} className="flex justify-between">
                       <span className="text-sm text-black">{name}:</span>
                       <span className="text-sm font-medium">{number}</span>
                     </div>

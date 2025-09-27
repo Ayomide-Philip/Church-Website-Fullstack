@@ -6,7 +6,7 @@ export default function DashboardOverview() {
   const { leaders } = useLoaderData();
   const overview = [
     { title: "Leaders", number: leaders.length, logo: User2 },
-    { title: "Members", number: 84, logo: Users },
+    { title: "Users", number: 84, logo: Users },
     { title: "Blog", number: 50, logo: Calendar },
     { title: "Message", number: 100, logo: MessageCircle },
   ];

@@ -3,7 +3,6 @@ import NoLeaderFound from "../leaders/noLeaderFound";
 
 export default function RecentLeaders({ heading, limit }) {
   const { leaders } = useLoaderData();
-  console.log(leaders);
 
   const tableHeader = [
     "Name",

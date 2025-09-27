@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/home";
+import Home, { Action as HomeAction } from "./pages/home";
 import DashboardHome, {
   Loader as DashboardHomeLoader,
 } from "./pages/dashboard";
@@ -24,7 +24,7 @@ export default function PageRouter() {
           path: "/",
           element: <HomeLayout />,
           children: [
-            { element: <Home />, index: true },
+            { element: <Home />, index: true, action: HomeAction },
             { path: "/leaders", element: <OurLeader /> },
             { path: "/login", element: <Login />, action: FormAction },
           ],

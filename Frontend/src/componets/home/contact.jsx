@@ -1,3 +1,5 @@
+import { Form } from "react-router-dom";
+
 export default function Contact() {
   return (
     <section className="text-gray-600 body-font relative pt-5">
@@ -21,9 +23,12 @@ export default function Contact() {
           <p className="leading-relaxed mb-5 text-gray-600">
             Write us a message and we will get back to you as soon as possible.
           </p>
-          <form action="https://formspree.io/f/moveqgar" method="POST">
+          <Form method="post">
             <div className="relative mb-4">
-              <label htmlFor="email" className="leading-7 text-sm text-gray-600">
+              <label
+                htmlFor="email"
+                className="leading-7 text-sm text-gray-600"
+              >
                 Email
               </label>
               <input
@@ -35,7 +40,10 @@ export default function Contact() {
               />
             </div>
             <div className="relative mb-4">
-              <label htmlFor="message" className="leading-7 text-sm text-gray-600">
+              <label
+                htmlFor="message"
+                className="leading-7 text-sm text-gray-600"
+              >
                 Message
               </label>
               <textarea
@@ -50,7 +58,7 @@ export default function Contact() {
               value="Submit"
               className="text-white bg-blue-500 border-0 py-2 w-full px-6 focus:outline-none hover:bg-blue-600 rounded text-lg"
             />
-          </form>
+          </Form>
         </div>
       </div>
     </section>
