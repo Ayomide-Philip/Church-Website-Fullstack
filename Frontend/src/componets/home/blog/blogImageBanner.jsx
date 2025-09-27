@@ -1,10 +1,8 @@
 import { Search, X } from "lucide-react";
-import { useState } from "react";
-export default function BlogImageBanner() {
-  const [query, setQuery] = useState("");
+export default function BlogImageBanner({ query, setQuery }) {
   return (
     <section className="flex h-[70vh] bg-[url(/images/cta-image.jpg)] text-center justify-center items-center flex-col gap-5">
-      <p className="bg-blue-500 p-1 px-4 font-light text-white font-mono">
+      <p className="bg-blue-500 p-1 px-4 font-semibold text-white font-mono">
         BLOG
       </p>
       <h1 className="text-4xl text-black md:text-white font-bold capitalize font-mono">
@@ -23,6 +21,7 @@ export default function BlogImageBanner() {
         <button
           type="submit"
           className="text-black absolute right-4 top-3 cursor-pointer"
+          name="search"
         >
           <Search />
         </button>
@@ -30,6 +29,7 @@ export default function BlogImageBanner() {
           <button
             type="reset"
             className="text-black absolute right-12 top-3 cursor-pointer"
+            name="reset"
           >
             <X
               onClick={() => {
