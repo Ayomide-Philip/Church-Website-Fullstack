@@ -40,7 +40,7 @@ export default function PageRouter() {
               index: true,
               loader: DashboardHomeLoader,
             },
-            { element: <DashboardMembers />, path: "members" },
+            { element: <DashboardMembers />, path: "users" },
             {
               path: "leaders",
               children: [

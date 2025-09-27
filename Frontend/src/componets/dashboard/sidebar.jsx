@@ -24,8 +24,8 @@ export default function SideBar() {
       icon: ChartBar,
     },
     {
-      href: "/dashboard/members",
-      title: "Members",
+      href: "/dashboard/users",
+      title: "Users",
       icon: User2,
     },
     {
