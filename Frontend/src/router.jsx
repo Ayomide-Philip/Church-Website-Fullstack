@@ -17,6 +17,7 @@ import NewLeadersForm, {
   Action as NewLeaderAction,
 } from "./componets/dashboard/leaders/form";
 import Blog from "./pages/home/blog";
+import BlogLayout from "./componets/home/blog/blogLayout";
 export default function PageRouter() {
   return (
     <RouterProvider
@@ -28,7 +29,11 @@ export default function PageRouter() {
             { element: <Home />, index: true, action: HomeAction },
             { path: "/leaders", element: <OurLeader /> },
             { path: "/login", element: <Login />, action: FormAction },
-            { path: "/blog", element: <Blog /> },
+            {
+              path: "/blog",
+              element: <BlogLayout />,
+              children: [{ element: <Blog />, index: true }],
+            },
           ],
         },
         {
