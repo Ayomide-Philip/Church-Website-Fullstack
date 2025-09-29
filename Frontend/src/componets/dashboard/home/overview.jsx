@@ -3,10 +3,10 @@ import { Calendar, MessageCircle, User2, Users } from "lucide-react";
 import { useLoaderData } from "react-router-dom";
 
 export default function DashboardOverview() {
-  const { leaders } = useLoaderData();
+  const { leaders, users } = useLoaderData();
   const overview = [
     { title: "Leaders", number: leaders.length, logo: User2 },
-    { title: "Users", number: 84, logo: Users },
+    { title: "Users", number: users.length, logo: Users },
     { title: "Blog", number: 50, logo: Calendar },
     { title: "Message", number: 100, logo: MessageCircle },
   ];

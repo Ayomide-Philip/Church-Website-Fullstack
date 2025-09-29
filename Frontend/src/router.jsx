@@ -18,6 +18,7 @@ import NewLeadersForm, {
 } from "./componets/dashboard/leaders/form";
 import Blog from "./pages/home/blog";
 import BlogLayout from "./componets/home/blog/blogLayout";
+import BlogId from "./pages/home/blog/blogId";
 export default function PageRouter() {
   return (
     <RouterProvider
@@ -32,7 +33,10 @@ export default function PageRouter() {
             {
               path: "/blog",
               element: <BlogLayout />,
-              children: [{ element: <Blog />, index: true }],
+              children: [
+                { element: <Blog />, index: true },
+                { element: <BlogId />, path: ":id" },
+              ],
             },
           ],
         },

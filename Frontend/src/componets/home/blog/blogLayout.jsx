@@ -6,7 +6,9 @@ export default function BlogLayout() {
   return (
     <div>
       <BlogImageBanner query={query} setQuery={setQuery} />
-      <Outlet context={{ query, setQuery }} />
+      <section className="flex flex-col p-5 justify-center mb-10">
+        <Outlet context={{ query, setQuery }} />
+      </section>
     </div>
   );
 }

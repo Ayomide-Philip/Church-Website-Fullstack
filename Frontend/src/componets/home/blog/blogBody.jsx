@@ -58,7 +58,7 @@ const blogs = [
 ];
 export default function BlogBody({ query, setQuery }) {
   return (
-    <section className="flex flex-col p-5 justify-center mb-10">
+    <>
       <h1 className="text-3xl text-center font-semibold font-sans mb-10 capitalize">
         {query ? `Search result for "${query}".` : "Top Activities."}
       </h1>
@@ -67,6 +67,6 @@ export default function BlogBody({ query, setQuery }) {
           return <BlogCard key={idx} setQuery={setQuery} blog={blog} />;
         })}
       </div>
-    </section>
+    </>
   );
 }
