@@ -19,6 +19,8 @@ import NewLeadersForm, {
 import Blog from "./pages/home/blog";
 import BlogLayout from "./componets/home/blog/blogLayout";
 import BlogId from "./pages/home/blog/blogId";
+import History from "./pages/home/history";
+import MissionandVission from "./pages/home/missionandvission";
 export default function PageRouter() {
   return (
     <RouterProvider
@@ -29,6 +31,8 @@ export default function PageRouter() {
           children: [
             { element: <Home />, index: true, action: HomeAction },
             { path: "/leaders", element: <OurLeader /> },
+            { path: "/history", element: <History /> },
+            { path: "/missionandvission", element: <MissionandVission /> },
             { path: "/login", element: <Login />, action: FormAction },
             {
               path: "/blog",
