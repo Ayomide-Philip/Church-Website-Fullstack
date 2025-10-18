@@ -25,13 +25,13 @@ export default function MissionSection() {
         </h1>
         <div className="p-3">
           <div className="md:w-[80%] xs:w-[90%] mx-auto pt-4">
-            {purposeStatement.map((purpose, idx) => {
+            {purposeStatement.map(({ id, heading, paragraph }, idx) => {
               return (
                 <div key={idx}>
                   <h1 className="font-semibold text-lg mt-4 text-black">
-                    {purpose.id}. {purpose.heading}
+                    {id}. {heading}
                   </h1>
-                  <p className="mt-2 text-md text-black">{purpose.paragraph}</p>
+                  <p className="mt-2 text-md text-black">{paragraph}</p>
                 </div>
               );
             })}
